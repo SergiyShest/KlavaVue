@@ -2,8 +2,7 @@
   <div class="about">
     <div >{{Example}}</div>
    <div  >
-   <span   v-for="item in res"   v-bind:class="{ 'gr': item.ok ,'re': item.ok===false}"> {{ item.text }} {{item.ok }}</span>
-  </div>
+   </div>
    <input    v: v-model="input"/>
   </div>
 </template>

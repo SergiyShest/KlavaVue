@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" height="20" />
-    <HelloWorld Example="Welcome to Your Vue.js App" />
+    <klava-inp Example="Welcome to Your Vue.js App" Inputed="Welcome to"  />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/klava.vue";
-
+import klava from "./components/klava.vue";
+import klavaInp from "./components/klavaInp.vue";
 export default {
   name: "app",
   components: {
-    HelloWorld
+    klavaInp
   }
 };
 </script>

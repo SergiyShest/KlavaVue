@@ -2,7 +2,7 @@
   <div class="hello">
     <span class="gr">{{textOk}}</span>
     <span class="re">{{erText}}</span>
-    <span>{{notInpText}}</span> 
+    <span>{{notInptText}}</span> 
   </div>
 </template>
 
@@ -13,33 +13,45 @@ export default {
     Inputed: String,
     Example: String
   },
-  data:{textOk:'',erText:'',notInptText:''}
-
+  data:function () {
+    return {textOk:'',erText:'',notInptText:''}
+  }
  ,
   methods:{
          compare(){
-   textOk='';erText='';notInptText='';
-  for(i=0;i<Example.length;i++)
+   this.textOk='';this.erText='';this.notInptText='';
+  for(var i=0;i<this.Example.length;i++)
     { 
       var inpChar='';
-      if(Inputed.length<i){inpChar=Inputed[i];}
+      if(i<this.Inputed.length){inpChar=this.Inputed[i];}
       
-      exChar=Example[i];
-      if(inpChar==exChar && erText.length==0)
+    var exChar=this.Example[i];
+      if(inpChar==exChar && this.erText.length==0)
       {
-        textOk+=inpChar;continue;
+        this.textOk+=inpChar;continue;
       }
        if(inpChar=='')
       {
-        notInptText+=inpChar;continue;
+        this.notInptText+=exChar;continue;
       } 
-      if(inpChar!=exChar||erText.length>0)
+      if(inpChar!=exChar||this.erText.length>0)
       {
-        erText+=inpChar;
+        this.erText+=exChar;
       } 
     }   
      
      }
+},computed: {
+    // геттер вычисляемого значения
+    reversedMessage: function () {
+      this.compare();
+      return this.Inputed.split('').reverse().join('')
+    }},
+
+watch:{
+reversedMessage:function(newV, oldV ){
+ this.compare();
+}
 }
 }
 </script>

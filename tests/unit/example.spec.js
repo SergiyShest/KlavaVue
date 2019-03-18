@@ -1,12 +1,18 @@
 import { shallowMount } from "@vue/test-utils";
-import HelloWorld from "@/components/HelloWorld.vue";
+import inpVue from "@/components/klavaInp.vue";
 
-describe("HelloWorld.vue", () => {
+describe("input.vue", () => {
   it("renders props.msg when passed", () => {
-    const msg = "new message";
-    const wrapper = shallowMount(HelloWorld, {
-      propsData: { msg }
+    const inp = "new message";
+    const ex = "new message";
+    const wrapper = shallowMount(inpVue, {
+      propsData: { inp,ex }
     });
-    expect(wrapper.text()).toMatch(msg);
+    expect(wrapper.text()).toMatch(inp);
   });
+
 });
+
+
+  
+
