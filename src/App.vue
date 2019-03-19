@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" height="20" />
-    <klava-inp Example="Welcome to Your Vue.js App" Inputed="Welcome to"  />
+    <klava-inp Example="Welcome to Your Vue.js App" Inputed="Welcome to ss"  />
   </div>
 </template>
 
