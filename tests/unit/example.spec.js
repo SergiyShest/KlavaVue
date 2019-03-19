@@ -13,13 +13,16 @@ describe("input.vue", () => {
 
 });
 describe("input1.vue", () => {
-  it("renders props.msg when passed", () => {
-    const inp = "new messagedd";
+  it("data objects set correct", () => {
+    const inp = "new message";
     const ex = "new Error";
     const wrapper = shallowMount(inpVue, {
       propsData: { Example: ex, Inputed: inp }
     });
-    expect(wrapper.text()).toMatch(inp);
+    
+    expect(wrapper.vm.erText).toBe('Error');
+    expect(wrapper.vm.textOk).toBe('new ');
+    expect(wrapper.vm.notInptText).toBe('message');
   });
 
 });

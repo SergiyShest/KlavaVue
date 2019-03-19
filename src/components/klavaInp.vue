@@ -63,6 +63,7 @@ color: #42b983;
 background-color: rgb(212, 212, 236);
 }
 .re{
-color: #bb1212;
+color: #fff;
+background-color: rgb(243, 18, 2);
 }
 </style>
