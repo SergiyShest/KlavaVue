@@ -1,61 +1,38 @@
 <template>
   <div class="about">
-    <div >{{Example}}</div>
-   <div  >
-   </div>
-   <input    v: v-model="input"/>
+   <klava-inp :Example="Example" :Inputed="inputedString" /> 
+   <input type="text"  v-model="inputedString" placeholder="input text above"/>
   </div>
 </template>
 <script >
 import Vue from "vue";
+import klavaInp from "./klavaInp.vue";
 export default {
   name: "Klava",
+    components: {
+    klavaInp
+  },
   props: {
-    Example: String
+    Example: String,
+    ErrorCount:Number
+    
   },
 
  data(){return {
-   res:[{text:'',ok:true},{text:'',ok:false},{text:'',ok:null}],
-   input:'tast'  
+   inputedString:''  
  };
  },
  methods:{
-       compare(){
-     var textOk='';
-     var erText='';
-     var textAfteEr='';
-     var notInptText='';    
-  for(i=0;i<Example.length;i++)
-    { 
-      var inpChar='';
-      if(input.length<i){inpChar=input[i];}
-      
-      exChar=Example[i];
-      if(inpChar==exChar && erText.length==0)
-      {
-        textOk+=inpChar;continue;
-      }
-       if(inpChar=='')
-      {
-        notInptText+=inpChar;continue;
-      } 
-      if(inpChar!=exChar||erText.length>0)
-      {
-        erText+=inpChar;
-      } 
-      if(inpChar!=exChar||erText.length==0)
-      {
-        textOk+=inpChar;
-      }      
-    }   
      
-     }
  },
  watch:{
-input:function(newV, oldV ){
- 
-}
-}
+  inputedString:function(newV, oldV)
+  {
+   
+  } 
+ }
+
+
 }
 </script>
 

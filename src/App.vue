@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" height="20" />
-    <klava-inp Example="Welcome to Your Vue.js App" Inputed="Welcome to ss"  />
+    <klava Example="Welcome to Your Vue.js App"   />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import klavaInp from "./components/klavaInp.vue";
 export default {
   name: "app",
   components: {
-    klavaInp
+    klava
   }
 };
 </script>

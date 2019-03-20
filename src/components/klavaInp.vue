@@ -8,13 +8,19 @@
 
 <script>
 export default {
-  name: "InputedString",
+  name: "klvaInp",
+
   props: {
     Inputed: String,
     Example: String
   },
   data:function () {
-    return {textOk:'',erText:'',notInptText:''}
+    return {
+      textOk:'',
+    erText:'',
+    notInptText:'',
+    oldErr:''
+    }
   }
  ,
   methods:{
@@ -24,7 +30,7 @@ export default {
     { 
       var inpChar='';
       if(i<this.Inputed.length){inpChar=this.Inputed[i];}
-      
+
     var exChar=this.Example[i];
       if(inpChar==exChar && this.erText.length==0)
       {
@@ -39,7 +45,10 @@ export default {
         this.erText+=exChar;
       } 
     }   
-     
+     //if(this.erText.length>0)
+     //{
+     //  this.$emit('error', this.erText);
+     //}
      }
 },computed: {
     // геттер вычисляемого значения
@@ -50,7 +59,7 @@ export default {
 
 watch:{
 reversedMessage:function(newV, oldV ){
- this.compare();
+//this.compare();
 }
 }
 }

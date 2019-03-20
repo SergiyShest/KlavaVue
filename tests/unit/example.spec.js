@@ -10,7 +10,6 @@ describe("input.vue", () => {
     });
     expect(wrapper.text()).toMatch(inp);
   });
-
 });
 describe("input1.vue", () => {
   it("data objects set correct", () => {
@@ -19,10 +18,11 @@ describe("input1.vue", () => {
     const wrapper = shallowMount(inpVue, {
       propsData: { Example: ex, Inputed: inp }
     });
-    
-    expect(wrapper.vm.erText).toBe('Error');
-    expect(wrapper.vm.textOk).toBe('new ');
-    expect(wrapper.vm.notInptText).toBe('message');
-  });
 
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.erText).toBe("Error");
+      expect(wrapper.vm.textOk).toBe("new ");
+     // expect(wrapper.vm.notInptText).toBe("message");
+    });
+  });
 });
