@@ -44,7 +44,8 @@ export default {
       {
         this.erText+=exChar;
       } 
-    }   
+    }  
+    
      //if(this.erText.length>0)
      //{
      //  this.$emit('error', this.erText);
@@ -60,6 +61,11 @@ export default {
 watch:{
 reversedMessage:function(newV, oldV ){
 //this.compare();
+},
+erText:function(newV, oldV ){
+ if(oldV.length==0 && newV.length>0) {
+   this.$emit('error', this.erText);//create Error event
+ }
 }
 }
 }
