@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-   <klava-inp :Example="Example" :Inputed="inputedString" /> 
+  <div class="about">{{counter}}
+   <klava-inp :Example="Example" :Inputed="inputedString" v-on:error="errorCounter()" /> 
    <input type="text"  v-model="inputedString" placeholder="input text above"/>
   </div>
 </template>
@@ -19,11 +19,14 @@ export default {
   },
 
  data(){return {
-   inputedString:''  
+   inputedString:'',counter:0 
  };
  },
  methods:{
-     
+   errorCounter:function() 
+   {
+     this.counter++;
+   } 
  },
  watch:{
   inputedString:function(newV, oldV)

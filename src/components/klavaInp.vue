@@ -51,23 +51,22 @@ export default {
      //  this.$emit('error', this.erText);
      //}
      }
-},computed: {
-    // геттер вычисляемого значения
-    reversedMessage: function () {
-      this.compare();
-      return this.Inputed.split('').reverse().join('')
-    }},
-
+}
+,
 watch:{
-reversedMessage:function(newV, oldV ){
-//this.compare();
+Inputed:function(newV, oldV ){
+this.compare();
 },
 erText:function(newV, oldV ){
  if(oldV.length==0 && newV.length>0) {
    this.$emit('error', this.erText);//create Error event
  }
 }
+},
+beforeMount(){
+this.compare();
 }
+
 }
 </script>
 
