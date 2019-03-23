@@ -5,7 +5,7 @@
         <klava-inp :Example="Example" :Inputed="inputedString"
                    v-on:error="errorCounter()"
                    v-on:next="nextStr()" />
-        <input type="text" v-model="inputedString" placeholder="input text above" />
+        <input class="inputStr" type="text" v-model="inputedString" placeholder="input text above" />
     </div>
 </template>
 <script>

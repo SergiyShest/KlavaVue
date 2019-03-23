@@ -1,5 +1,5 @@
 <template>
-    <div class="hello">
+    <div class="inputStr">
         <span class="gr">{{okText}}</span>
         <span class="re">{{erText}}</span>
         <span>{{notInptText}}</span>
@@ -81,5 +81,10 @@
     .re {
         color: #fff;
         background-color: rgb(243, 18, 2);
+    }
+    .inputStr {
+        width: 800px;
+        font-size: 20px;
+        background-color: rgb(212, 212, 236);
     }
 </style>
