@@ -1,15 +1,17 @@
 ﻿<template>
-    <div class="hello">
-        <h1>введено символов {{ inputedCharCount }}</h1>
-        <h1>общая скорость {{ totalSpeed }}</h1>
-        <h1>скорость {{ currentSpeed }}</h1>
+    <div class="watcher" >
+        <h3>ошибок {{ errorCount }}</h3>
+        <h3>введено символов {{ inputedCharCount }}</h3>
+        <h3>общая скорость {{ totalSpeed }}</h3>
+        <h3>скорость {{ currentSpeed }}</h3>
     </div>
 </template>
 <script>
     export default {
         name: "watcher",
         props: {
-            inputedCharCount: 0
+            inputedCharCount: 0,
+            errorCount:0
 
         },
         data() {
@@ -54,7 +56,7 @@
 <style scoped>
 
     h3 {
-        margin: 40px 0 0;
+        margin: 4px;
     }
 
     ul {
@@ -67,7 +69,12 @@
         margin: 0 10px;
     }
 
-    a {
+    .watcher {
+        
+        border: 2px;
+        border-radius: 2;
+        border-width: 2px;
         color: #42b983;
+        text-align: right;
     }
 </style>

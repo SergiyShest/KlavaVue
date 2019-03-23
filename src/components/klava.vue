@@ -1,11 +1,11 @@
 ﻿<template>
     <div class="about">
-        {{errorCount}}
-        <watcher :inputedCharCount="inputedCharCount" />
-        <klava-inp :Example="Example" :Inputed="inputedString"
+        <watcher :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
+        <klava-inp :Example="Example" :Inputed="inputedString"  align="left" 
                    v-on:error="errorCounter()"
                    v-on:next="nextStr()" />
-        <input class="inputStr" type="text" v-model="inputedString" placeholder="input text above" />
+        <input class="inputStr" type="text" v-model="inputedString" placeholder="input text above" 
+        align="left" />
     </div>
 </template>
 <script>

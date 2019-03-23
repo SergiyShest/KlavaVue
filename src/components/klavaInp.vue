@@ -83,8 +83,9 @@
         background-color: rgb(243, 18, 2);
     }
     .inputStr {
-        width: 800px;
+       width:100%;
         font-size: 20px;
         background-color: rgb(212, 212, 236);
+        
     }
 </style>
