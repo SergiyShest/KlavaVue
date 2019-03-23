@@ -1,20 +1,21 @@
 ﻿<template>
-  <div class="about">{{errorCount}}
-    <watcher :inputedCharCount="inputedCharCount"  />
-    <klava-inp :Example="Example" :Inputed="inputedString" 
-              v-on:error="errorCounter()"
-              v-on:next="nextStr()"/> 
-   <input type="text"  v-model="inputedString" placeholder="input text above"/>
-  </div>
+    <div class="about">
+        {{errorCount}}
+        <watcher :inputedCharCount="inputedCharCount" />
+        <klava-inp :Example="Example" :Inputed="inputedString"
+                   v-on:error="errorCounter()"
+                   v-on:next="nextStr()" />
+        <input type="text" v-model="inputedString" placeholder="input text above" />
+    </div>
 </template>
-<script >
+<script>
     import watcher from "./watcher.vue";
     import klavaInp from "./klavaInp.vue";
 
     export default {
         name: "Klava",
         components: {
-            klavaInp,watcher
+            klavaInp, watcher
         },
         props: {
 
@@ -23,10 +24,16 @@
 
         data() {
             return {
-                Example: 'String',
-                inputedCharCount:0,
+                AllExample: [
+                    "Проба пера проба пера проба пера",
+                    '++Как ныне сбирается Вещий Олег отмстить неразумным хазарам.',
+                    'Раз два три четыре пять вышел зайчик погулять'
+                ],
+                //        Example: 'String',
+                inputedCharCount: 0,
                 inputedString: '',
-                errorCount: 0
+                errorCount: 0,
+                currStrIndex: 0
             };
         },
         methods: {
@@ -35,7 +42,10 @@
             },
             nextStr: function () {
                 this.inputedString = '';
-                this.Example = '++Как ныне сбирается Вещий Олег отмстить неразумным хазарам.';
+
+                if (this.currStrIndex < this.AllExample.length) {
+                    this.currStrIndex++;
+                }
             }
         },
         watch: {
@@ -44,7 +54,12 @@
                 this.inputedCharCount++;
 
             }
+        },
+        computed: {
+            Example: function () { return this.AllExample[this.currStrIndex]; }
+
         }
+
     }
 
 </script>
