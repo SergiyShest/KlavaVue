@@ -1,9 +1,9 @@
 ﻿<template>
     <div class="watcher" >
-        <h3>ошибок {{ errorCount }}</h3>
-        <h3>введено символов {{ inputedCharCount }}</h3>
-        <h3>общая скорость {{ totalSpeed }}</h3>
-        <h3>скорость {{ currentSpeed }}</h3>
+        <h3>Ошибок: {{ errorCount }}</h3>
+        <h3>Введено символов: {{ inputedCharCount }}</h3>
+        <h3>Средняя скорость: {{ totalSpeed }}</h3>
+        <!-- <h3>скорость {{ currentSpeed }}</h3> -->
     </div>
 </template>
 <script>

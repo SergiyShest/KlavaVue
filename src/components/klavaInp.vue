@@ -21,18 +21,19 @@
                 notInptText: '',
                 oldErr: ''
             }
-        }
-        ,
+        },
         methods: {
             compare() {
                 this.okText = ''; this.erText = ''; this.notInptText = '';
+                if(this.Example==null)return;
                 for (var i = 0; i < this.Example.length; i++) {
                     var inpChar = '';
                     if (i < this.Inputed.length) { inpChar = this.Inputed[i]; }
 
                     var exChar = this.Example[i];
                     if (inpChar == exChar && this.erText.length == 0) {
-                        this.okText += inpChar; continue;
+                        this.okText += inpChar;
+                         continue;
                     }
                     if (inpChar == '') {
                         this.notInptText += exChar; continue;
@@ -41,10 +42,8 @@
                         this.erText += exChar;
                     }
                 }
-
             }
-        }
-        ,
+        },
         watch: {
 
             Inputed: function () {
@@ -56,10 +55,11 @@
                 }
             },
             okText: function (newV, oldV) {
-
-                if (this.Example.length <= this.okText.length) {
+                   if(this.Example==null)return;
+                    this.$emit('ok');//create Ok event 
+                    if (this.Example.length <= this.okText.length) {
                     console.log(this.Example + '<=' + newV.length)
-                    this.$emit('next');//create next event
+                    this.$emit('next');//create next event when Example is over
                 }
 
             }
@@ -84,7 +84,7 @@
     }
     .inputStr {
        width:100%;
-        font-size: 20px;
+        font-size: 40px;
         background-color: rgb(212, 212, 236);
         
     }

@@ -2,9 +2,12 @@
     <div class="info">
         <watcher :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
         <klava-inp :Example="Example" :Inputed="inputedString"  align="left" 
-                   v-on:error="errorCounter()"
-                   v-on:next="nextStr()" />
-        <input class="inputStr" type="text" v-model="inputedString" placeholder="input text above" 
+                   v-on:error="errorCount++"
+                   v-on:next="nextStr()" 
+                   v-on:ok="inputedCharCount++" 
+                   />
+        <input class="inputStr" type="text" v-model="inputedString" autofocus  
+       v-bind:placeholder="placeholder"
         align="left" />
     </div>
 </template>
@@ -25,11 +28,11 @@
         data() {
             return {
                 AllExample: [
-                    "Проба пера проба пера проба пера",
-                    '++Как ныне сбирается Вещий Олег отмстить неразумным хазарам.',
-                    'Раз два три четыре пять вышел зайчик погулять'
+                    "Проба",
+                    '++Как',
+                    'Раз два'
                 ],
-                //        Example: 'String',
+                placeholder: 'input string above',
                 inputedCharCount: 0,
                 inputedString: '',
                 errorCount: 0,
@@ -37,22 +40,16 @@
             };
         },
         methods: {
-            errorCounter: function () {
-                this.errorCount++;
-            },
-            nextStr: function () {
+           
+            nextStr: function () {//
                 this.inputedString = '';
-
-                if (this.currStrIndex < this.AllExample.length) {
+                if (this.currStrIndex < this.AllExample.length+1) {
                     this.currStrIndex++;
                 }
-            }
-        },
-        watch: {
-            //
-            inputedString: function () {
-                this.inputedCharCount++;
-
+                else
+                {
+                  this.placeholder = 'press enter for continue';
+                }
             }
         },
         computed: {
