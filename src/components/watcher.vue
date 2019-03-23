@@ -75,6 +75,6 @@
         border-radius: 2;
         border-width: 2px;
         color: #42b983;
-        text-align: right;
+        text-align: left;
     }
 </style>

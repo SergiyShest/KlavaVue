@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="about">
+    <div class="info">
         <watcher :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
         <klava-inp :Example="Example" :Inputed="inputedString"  align="left" 
                    v-on:error="errorCounter()"
