@@ -1,18 +1,20 @@
 ﻿<template>
   <div class="about">{{errorCount}}
-   <klava-inp :Example="Example" :Inputed="inputedString" 
+    <watcher :inputedCharCount="inputedCharCount"  />
+    <klava-inp :Example="Example" :Inputed="inputedString" 
               v-on:error="errorCounter()"
               v-on:next="nextStr()"/> 
    <input type="text"  v-model="inputedString" placeholder="input text above"/>
   </div>
 </template>
 <script >
-import Vue from "vue";
-import klavaInp from "./klavaInp.vue";
+    import watcher from "./watcher.vue";
+    import klavaInp from "./klavaInp.vue";
+
     export default {
         name: "Klava",
         components: {
-            klavaInp
+            klavaInp,watcher
         },
         props: {
 
@@ -22,8 +24,9 @@ import klavaInp from "./klavaInp.vue";
         data() {
             return {
                 Example: 'String',
-                ErrorCount: 0,
-                inputedString: '', errorCount: 0
+                inputedCharCount:0,
+                inputedString: '',
+                errorCount: 0
             };
         },
         methods: {
@@ -36,7 +39,9 @@ import klavaInp from "./klavaInp.vue";
             }
         },
         watch: {
-            inputedString: function (newV, oldV) {
+            //
+            inputedString: function () {
+                this.inputedCharCount++;
 
             }
         }

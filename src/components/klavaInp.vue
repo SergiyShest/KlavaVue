@@ -42,18 +42,12 @@
                     }
                 }
 
-                //if(this.erText.length>0)
-                //{
-                //  this.$emit('error', this.erText);
-                //}
             }
         }
         ,
         watch: {
-            //Example: function (newV, oldV) {
-            //    this.Inputed='';
-            //},
-            Inputed: function (newV, oldV) {
+
+            Inputed: function () {
                 this.compare();
             },
             erText: function (newV, oldV) {
