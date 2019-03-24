@@ -12,6 +12,8 @@
     </div>
 </template>
 <script>
+
+    import { GetKvasiText } from "./TextCreation.js";
     import watcher from "./watcher.vue";
     import klavaInp from "./klavaInp.vue";
 
@@ -27,11 +29,7 @@
 
         data() {
             return {
-                AllExample: [
-                    "Проба",
-                    '++Как',
-                    'Раз два'
-                ],
+                AllExample: [],
                 placeholder: 'input string above',
                 inputedCharCount: 0,
                 inputedString: '',
@@ -43,18 +41,22 @@
            
             nextStr: function () {//
                 this.inputedString = '';
-                if (this.currStrIndex < this.AllExample.length+1) {
+                if (this.currStrIndex < this.AllExample.length-1) {
                     this.currStrIndex++;
                 }
                 else
                 {
-                  this.placeholder = 'press enter for continue';
+                    this.placeholder = 'press enter for continue';
+                    this.AllExample =   GetKvasiText();
                 }
             }
         },
         computed: {
             Example: function () { return this.AllExample[this.currStrIndex]; }
 
+        },
+        beforeMount() {
+            this.AllExample = GetKvasiText();
         }
 
     }

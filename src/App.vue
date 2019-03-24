@@ -5,14 +5,15 @@
 </template>
 
 <script>
+ //   import { TextCreation } from './components/TextCreation.js'; 
 import klava from "./components/klava.vue";
-import klavaInp from "./components/klavaInp.vue";
 export default {
   name: "app",
   components: {
     klava
   }
-};
+    };
+   
 </script>
 
 <style>
