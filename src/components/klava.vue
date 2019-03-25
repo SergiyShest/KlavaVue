@@ -9,6 +9,9 @@
         <input class="inputStr" type="text" v-model="inputedString" autofocus  
        v-bind:placeholder="placeholder"
         align="left" />
+        <br/>
+        <setting v-on:langChanged="changeLang($event)" />
+      
     </div>
 </template>
 <script>
@@ -16,11 +19,12 @@
     import { GetKvasiText } from "./TextCreation.js";
     import watcher from "./watcher.vue";
     import klavaInp from "./klavaInp.vue";
+    import setting from "./setting.vue";
 
     export default {
         name: "Klava",
         components: {
-            klavaInp, watcher
+            klavaInp, watcher,setting
         },
         props: {
 
@@ -34,11 +38,17 @@
                 inputedCharCount: 0,
                 inputedString: '',
                 errorCount: 0,
-                currStrIndex: 0
+                currStrIndex: 0,
+                sentationCount: 3,
+                lang:'ru',
+                avaiableLang:['ru','en']
             };
         },
         methods: {
-           
+            changeLang: function (e) {
+                this.lang = e;
+                this.AllExample = GetKvasiText(this.sentationCount, this.lang);
+            },
             nextStr: function () {//
                 this.inputedString = '';
                 if (this.currStrIndex < this.AllExample.length-1) {
@@ -47,7 +57,7 @@
                 else
                 {
                     this.placeholder = 'press enter for continue';
-                    this.AllExample =   GetKvasiText();
+                    this.AllExample = GetKvasiText(this.sentationCount, this.lang);
                 }
             }
         },
@@ -56,7 +66,7 @@
 
         },
         beforeMount() {
-            this.AllExample = GetKvasiText();
+            this.AllExample = GetKvasiText(this.sentationCount, this.lang);
         }
 
     }
