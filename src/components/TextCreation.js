@@ -1,15 +1,26 @@
 ﻿var Nouns = ["крокодил", "чувак", "чайник", "пирдедус", "задачонок", "дибилыч", "петух", "пес"];
-var Adjectives = ["красный", "мокрый", "влюбленный", "пластилиновый", "умный", "сумашедший"];
+var Adjectives = ["красный", "мокрый", "пластилиновый", "умный", "сумашедший"];
 var AddVerbs = ["весело", "смешно", "красиво", "честно", "глупо", "криво", "пакостно", "злорадно", "подло"];
 var Verbs = ["мылся", "прыгал", "пукал", "восхищался", "насмехался", "ругался", "бесился", "играл", "срал"]
-var PlasesIn = ["бане", "оболочке", "луже", "яме", "доме", "машине", "самолете", "песочнице", "хлеву", "углу", "тубзике", "сортире"]
-var PlasesOn = ["балконе", "крыше", "лужайке", "марсе", "луне", "земле", "жаре", "холоде", "столе", "скамейке", "посту", "шкафу"]
-function Word(arr,exclude) {
-    var ind = Math.floor(Math.random() * arr.length);
+
+var NounsW = ["девушка", "крыса", "коза", "лиса", "старуха", "фея", "лягушка", "ссука"];
+var AdjectivesW = ["желтая", "мокрая", "злая", "уродливая", "глупая", "красивая","крохотная","блестящая","мариновая"];
+
+var VerbsW = ["мылась", "прыгала", "пукала", "восхищалась", "насмехалась", "ругалась", "бесилась", "играла", "срала","целовалась"]
+
+var PlasesIn = ["помойке", "проруби", "ведре", "кровати", "бане", "оболочке", "луже", "яме", "доме", "машине", "самолете", "песочнице", "хлеву", "углу", "тубзике", "сортире"]
+
+var PlasesOn = ["травке","балконе", "крыше", "лужайке", "марсе", "луне", "земле", "жаре", "холоде", "столе", "скамейке", "посту", "шкафу"]
+
+function Word(arr, exclude = null) {
+    var ind = Math.floor(Math.random() * arr.length);//random digit in range 0-arr.length
     var word = arr[ind];
-    if (exclude!=null && exclude.includes(word)) {
-        word = Word(arr, exclude);
-    }
+    if (exclude !=null){
+        var num=exclude.indexOf(word);
+    if (num >= 0) {
+
+      word = Word(arr, exclude);
+    }}
     return word;
 }
 function TRANSLATE(txt, dir = "ru-en") {
@@ -29,26 +40,31 @@ function TRANSLATE(txt, dir = "ru-en") {
 
 
 
-function GetSentation1() {
+function GetSentationM() {
 
     var adjective1 = Word(Adjectives);
+    var arr=  [ adjective1];
+
+     
     var s =
         adjective1 + ' и ' +
-        Word(Adjectives, new Array()[ adjective1]) + ' ' +
+        Word(Adjectives, arr) + ' ' +
         Word(Nouns) + ' ' +
         Word(AddVerbs) + ' ' +
         Word(Verbs);
 
     return s + AddPlace() + '.';
 }
-function GetSentation2() {
-    var ind = Math.floor(Math.random() * 2);
+function GetSentationW() {
+    var adjective1 = Word(AdjectivesW);
+    var arr=  [ adjective1];
+
     var s =
-        Word(Adjectives) + ' и ' +
-        Word(Adjectives) + ' ' +
-        Word(Nouns) + ' ' +
+    adjective1 + ' и ' +
+        Word(AdjectivesW,arr) + ' ' +
+        Word(NounsW) + ' ' +
         Word(AddVerbs) + ' ' +
-        Word(Verbs);
+        Word(VerbsW);
 
     return s + AddPlace() + '.';
 }
@@ -70,11 +86,11 @@ function AddPlace() {
 }
 
 function GetSentation() {
-    var sentence = GetSentation3();
-    var sentType = Math.floor(Math.random() * 5);//
-    if (sentType == 0) sentence = GetSentation1();
-    if (sentType == 1) sentence = GetSentation2();
-    if (sentType == 3) sentence = GetSentation3();
+    var sentence = GetSentationM();
+    var sentType = Math.floor(Math.random() * 2);//
+   if (sentType == 0) sentence = GetSentationM();
+    if (sentType == 1) sentence = GetSentationW();
+   //if (sentType == 3) sentence = GetSentation3();
     var sentence = sentence[0].toUpperCase() + sentence.substr(1, sentence.length);
     return sentence;
 }
