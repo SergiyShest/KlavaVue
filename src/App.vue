@@ -1,7 +1,5 @@
 <template>
-
-    <klava    />
-
+    <klava  />
 </template>
 
 <script>

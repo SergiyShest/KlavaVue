@@ -15,14 +15,15 @@ var PlasesOn = ["травке","балконе", "крыше", "лужайке",
 function Word(arr, exclude = null) {
     var ind = Math.floor(Math.random() * arr.length);//random digit in range 0-arr.length
     var word = arr[ind];
-    if (exclude !=null){
+
+    if (exclude != null) {
         var num=exclude.indexOf(word);
     if (num >= 0) {
-
       word = Word(arr, exclude);
     }}
     return word;
 }
+
 function TRANSLATE(txt, dir = "ru-en") {
     var request = new XMLHttpRequest();
     var text = encodeURIComponent(txt);
@@ -39,7 +40,7 @@ function TRANSLATE(txt, dir = "ru-en") {
 };
 
 
-
+//предложение мужского рода
 function GetSentationM() {
 
     var adjective1 = Word(Adjectives);
@@ -47,14 +48,15 @@ function GetSentationM() {
 
      
     var s =
-        adjective1 + ' и ' +
+        adjective1 + ' и ' +//прилагательное
         Word(Adjectives, arr) + ' ' +
-        Word(Nouns) + ' ' +
-        Word(AddVerbs) + ' ' +
-        Word(Verbs);
+        Word(Nouns) + ' ' +//существительное
+        Word(AddVerbs) + ' ' +//наречие
+        Word(Verbs);//глагол
 
     return s + AddPlace() + '.';
 }
+//предложение женского рода
 function GetSentationW() {
     var adjective1 = Word(AdjectivesW);
     var arr=  [ adjective1];
@@ -79,12 +81,13 @@ function GetSentation3() {
     return s + AddPlace() + '.';
 }
 //place and preposition (in or on)
+
 function AddPlace() {
     var ind = Math.floor(Math.random() * 2);
     if (ind == 0) { return ' на ' + Word(PlasesOn); }
     else { return ' в ' + Word(PlasesIn); }
 }
-
+//получение случайного предложения
 function GetSentation() {
     var sentence = GetSentationW();
     var sentType = Math.floor(Math.random() * 4);//
@@ -95,6 +98,7 @@ function GetSentation() {
     return sentence;
 }
 
+//получение текста из count предложений на lang языке
 function KvasiText(count, lang) {
     var arr = new Array();
     for (var i = 0; i < count; i++) {

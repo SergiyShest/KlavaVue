@@ -17,7 +17,6 @@
 <script>
 
     import { GetKvasiText } from "./TextCreation.js";
-
     import watcher from "./watcher.vue";
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
@@ -28,8 +27,6 @@
             klavaInp, watcher,setting
         },
         props: {
-
-
         },
 
         data() {
@@ -68,6 +65,7 @@
 
         },
         beforeMount() {
+            //инициализация первый раз
             this.AllExample = GetKvasiText(this.sentationCount, this.lang);
         }
 

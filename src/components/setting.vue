@@ -1,11 +1,11 @@
 ﻿<template>
     <div class="setting">
         <h3>Name: </h3>
-        <select v-model="userName">
+        <select v-model="currentUser">
             <option selected>{{currentUser}}</option>
             <option v-for="user in users" >{{user}}</option>
         </select>
-        <button @cluck="createNewUser">createNewUser</button>
+        <button @click="createNewUser">createNewUser</button>
         <h3>language: </h3>
         <select v-model="selectedLang">
             <option selected>русский</option>
@@ -32,6 +32,11 @@
                 if (newVal == 'русский') val = 'ru'
 
                 this.$emit('langChanged', val);
+            }
+        }
+        , methods: {
+            createNewUser: function () {
+                alert('ale');
             }
         }
     };
