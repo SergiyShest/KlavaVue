@@ -86,11 +86,11 @@ function AddPlace() {
 }
 
 function GetSentation() {
-    var sentence = GetSentationM();
-    var sentType = Math.floor(Math.random() * 2);//
+    var sentence = GetSentationW();
+    var sentType = Math.floor(Math.random() * 4);//
    if (sentType == 0) sentence = GetSentationM();
     if (sentType == 1) sentence = GetSentationW();
-   //if (sentType == 3) sentence = GetSentation3();
+   if (sentType == 2) sentence = GetSentation3();
     var sentence = sentence[0].toUpperCase() + sentence.substr(1, sentence.length);
     return sentence;
 }
