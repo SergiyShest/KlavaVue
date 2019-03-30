@@ -24,7 +24,6 @@
         },
         methods: {
             getMin: function (milliSec,count) {
-               // return Math.floor(milliSec / (1000 * 60),2);
                 return Math.round(60 / ((milliSec / count )/1000),10) ;
             }
 
@@ -34,16 +33,16 @@
                 var dat = new Date();
 
                 if (this.inputedCharCount == 0 || this.timeBegin==0) {
-                    //init date on new
+                    //init date first time
                     this.timeBegin = dat.getTime();
                     this.tickTime = this.timeBegin;
                 } else {
                     var tick = dat.getTime() - this.tickTime;
                     var tickFromBegin = dat.getTime() - this.timeBegin;
                     console.log('tick=' + tickFromBegin + ' time=' + tick+'  timeBegin='+60/(tick/1000));
-                    this.currentSpeed = this.getMin(tick,1);
+                    this.currentSpeed = this.getMin(tick,1);//
                     this.totalSpeed = this.getMin(tickFromBegin, this.inputedCharCount);
-                    this.tickTime = dat.getTime();
+                    this.tickTime = dat.getTime();//save time
                  
 
                 }

@@ -1,28 +1,35 @@
 ﻿<template>
     <div class="setting">
+        <h3>Name: </h3>
+        <select v-model="userName">
+            <option selected>{{currentUser}}</option>
+            <option v-for="user in users" >{{user}}</option>
+        </select>
+        <button @cluck="createNewUser">createNewUser</button>
         <h3>language: </h3>
-        <select v-model="selectedLang" >
-           
-            <option selected >русский</option>
+        <select v-model="selectedLang">
+            <option selected>русский</option>
             <option>english</option>
-</select>
+        </select>
     </div>
 </template>
 <script>
     export default {
         name: "setting",
         props: {
-           
+
         },
         data() {
             return {
-                selectedLang: 'русский'
+                selectedLang: 'русский',
+                currentUser: 'Sergiy',
+                users: ['Sergiy',"Сережа","Саша"]
             }
         }
         , watch: {
             selectedLang: function (newVal) {
-              var  val = 'en';
-                if (newVal == 'русский')val='ru'
+                var val = 'en';
+                if (newVal == 'русский') val = 'ru'
 
                 this.$emit('langChanged', val);
             }
