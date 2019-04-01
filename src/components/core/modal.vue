@@ -2,7 +2,7 @@
     <transition name="modal">
         <div class="modal-mask">
             <div class="modal-wrapper">
-                <div class="modal-container">
+                <div class="modal-container" style="padding:40px;background-color:aqua">
                     <div class="modal-header">
                         <slot name="header">
                             default header
@@ -15,10 +15,10 @@
                     </div>
                     <div class="modal-footer">
                         <slot name="footer">
-                            <button class="modal-default-button" @click="$emit('close')">
+                            <button class="modal-default-button" @click="$emit('close')" style="margin:3px">
                                 Cancel
                             </button>
-                            <button class="modal-default-button" @click="$emit('ok')">
+                            <button class="modal-default-button" @click="$emit('ok')" style="margin:3px">
                                 OK
                             </button>
                         </slot>
@@ -65,7 +65,8 @@
 
     .modal-header h3 {
         margin-top: 0;
-        color: #42b983;
+        color: #6dbdb8;
+        background-color:navy;
     }
 
     .modal-body {
@@ -74,6 +75,9 @@
 
     .modal-default-button {
         float: right;
+        padding: 3px;
+        margin: 13px;
+
     }
 
     /*

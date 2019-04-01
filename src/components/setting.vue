@@ -1,17 +1,17 @@
 ﻿<template>
     <div class="setting">
         
-        <h3>Name: {{currentUser}}</h3>
+        <h3>Name: {{currentUserResults}} </h3>
         <select v-model="currentUser">
             <option selected>{{currentUser}}</option>
             <option v-for="user in users" >{{user}}</option>
         </select>
         <new-setting v-on:usercreated="reloadUsers()" ></new-setting>
-        <h3>language: </h3>
+        <!--<h3>language: </h3>
         <select v-model="selectedLang">
             <option selected>русский</option>
             <option>english</option>
-        </select>
+        </select>-->
     </div>
 </template>
 <script>
@@ -20,10 +20,10 @@
         name: "setting",
         components: { newSetting},
         props: {
-        },
-        data() {
+        }
+        , data() {
             return {
-
+                currentUserResults:[],
                 selectedLang: 'русский',
                 currentUser: '',
                 users: []
@@ -36,16 +36,16 @@
                 this.$emit('langChanged', val);;;
             }
         }
-        ,
-        methods: {
+        , methods: {
             reloadUsers: function () {
                 var usersStr = localStorage.getItem('users');
-                console.log("0 " +usersStr)
+              
                 usersStr = usersStr.replace("\s+", " ").replace(";+", ';');
                 console.log("1 "+usersStr)
                 if (usersStr.length > 0) {
                     this.users.length = 0;
                     this.users = usersStr.split(';');
+
                     this.currentUser = localStorage.getItem("currentUser");
                     if (this.currentUser == null || this.currentUser =="undefinded")
                     {
@@ -54,7 +54,7 @@
                     
 
                 }
-                else {
+                else {//
                     this.users = ['unknown'];//
                     this.currentUser = this.users[0];//пока первый пол
                 }

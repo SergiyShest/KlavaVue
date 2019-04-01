@@ -39,11 +39,11 @@
                 } else {
                     var tick = dat.getTime() - this.tickTime;
                     var tickFromBegin = dat.getTime() - this.timeBegin;
-                    console.log('tick=' + tickFromBegin + ' time=' + tick+'  timeBegin='+60/(tick/1000));
+                   // console.log('tick=' + tickFromBegin + ' time=' + tick+'  timeBegin='+60/(tick/1000));
                     this.currentSpeed = this.getMin(tick,1);//
                     this.totalSpeed = this.getMin(tickFromBegin, this.inputedCharCount);
                     this.tickTime = dat.getTime();//save time
-                 
+                    this.$emit('fixSpeed', this.totalSpeed);
 
                 }
             }
