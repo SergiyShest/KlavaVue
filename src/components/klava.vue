@@ -1,17 +1,16 @@
 ﻿<template>
     <div class="info">
-        <watcher :inputedCharCount="inputedCharCount" :errorCount="errorCount" v-on:speed="fixSpeed($event)" />
-        <klava-inp :Example="Example" :Inputed="inputedString"  align="left" 
+        <watcher :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
+        <klava-inp :Example="Example" :Inputed="inputedString" align="left"
                    v-on:error="errorCount++"
-                   v-on:next="nextSentation()" 
-                   v-on:ok="inputedCharCount++" 
-                   />
-        <input class="inputStr" type="text" v-model="inputedString" v-on:keyup.enter="nextText()"  autofocus  
-       v-bind:placeholder="placeholder"
-        align="left" />
-        <br/>
+                   v-on:next="nextSentation()"
+                   v-on:ok="inputedCharCount++" />
+        <input class="inputStr" type="text" v-model="inputedString" v-on:keyup.enter="nextText()" autofocus
+               v-bind:placeholder="placeholder"
+               align="left" />
+        <br />
         <setting v-on:langChanged="changeLang($event)" />
-      
+
     </div>
 </template>
 <script>
@@ -24,7 +23,7 @@
     export default {
         name: "Klava",
         components: {
-            klavaInp, watcher,setting
+            klavaInp, watcher, setting
         },
         props: {
         },
@@ -38,10 +37,11 @@
                 errorCount: 0,
                 nextSentationIndex: 0,
                 sentationCount: 2,
-                lang:'ru',
+                lang: 'ru',
                 avaiableLang: ['ru', 'en'],
-                speed:0
-
+                speed: 0,
+                //stopped:false,
+                running: true
             };
         },
         methods: {
@@ -51,28 +51,31 @@
             },
             nextSentation: function () {//
                 this.inputedString = '';
-                this.placeholder = 'nextSentationIndex='+this.SnextSentationIndex +' '+ this.AllExample.length +' press enter for continue';
-                if (this.nextSentationIndex < this.AllExample.length-1) {
+                
+                if (this.nextSentationIndex < this.AllExample.length-1 ) {
                     this.nextSentationIndex++;
+                    this.placeholder = 'nextIndex=' + this.nextSentationIndex + ' ' + this.AllExample.length + '';
                 }
-                else
-                {
-                    this.nextSentationIndex=0
-                    this.placeholder = 'Your speed is '+this.speed+' press enter for continue';
+                else {
+                    this.running = false;
+                    this.placeholder = 'Your speed is ' + this.getSpeed() + ' press enter for continue';
                 }
             },
             nextText: function () {//
-                  alert('ssss');
-                  if (this.inputedString = '') {
-                    this.AllExample = GetKvasiText(this.sentationCount, this.lang);
-                }
+                this.running = true;
+                this.nextSentationIndex = 0;
+                this.AllExample =  GetKvasiText(this.sentationCount, this.lang);
+                console.log(this.Example);
             }
-            , fixSpeed: function (speed) {
-                this.speed = speed;
+            , getSpeed: function () {
+                return sessionStorage.getItem('speed');
             }
         },
         computed: {
-            Example: function () { return this.AllExample[this.nextSentationIndex]; }
+            Example: function () {
+                if (!this.running) { return '' }
+                return this.AllExample[this.nextSentationIndex];
+            }
 
         },
         beforeMount() {

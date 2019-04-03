@@ -55,11 +55,11 @@
                 }
             },
             okText: function (newV, oldV) {
-                   if(this.Example==null)return;
-                    this.$emit('ok');//create Ok event 
-                    if (this.Example.length <= this.okText.length) {
-                    console.log(this.Example + '<=' + newV.length)
+                if (this.Example == null || this.Example =='')return;
+                if (this.Example.length <= this.okText.length) {
                     this.$emit('next');//create next event when Example is over
+                } else {
+                    this.$emit('ok');
                 }
 
             }
