@@ -58,7 +58,9 @@
                 }
                 else {
                     this.running = false;
-                    this.placeholder = 'Your speed is ' + this.getSpeed() + ' press enter for continue';
+                    var currSpeed=this.getSpeed() ;
+                    this.placeholder = 'Your speed is ' + currSpeed+ ' press enter for continue';
+                    this.fixResult=currSpeed;
                 }
             },
             nextText: function () {//
@@ -69,6 +71,9 @@
             }
             , getSpeed: function () {
                 return sessionStorage.getItem('speed');
+            }, 
+            fixResult: function (result) {
+                return sessionStorage.setItem('result',result);
             }
         },
         computed: {

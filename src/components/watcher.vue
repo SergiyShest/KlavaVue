@@ -42,8 +42,9 @@
                     this.currentSpeed = this.getMin(tick,1);//
                     this.totalSpeed = this.getMin(tickFromBegin, this.inputedCharCount);
                     this.tickTime = dat.getTime();//save time
-                    console.log(this.totalSpeed);
-                    sessionStorage.setItem('speed', this.totalSpeed);
+                   // console.log(this.totalSpeed);
+                   // sessionStorage.setItem('speed', this.totalSpeed);
+                   this.$store.dispatch('SAVE_SPEED', this.totalSpeed);
                 }
             }
         }

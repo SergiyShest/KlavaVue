@@ -45,7 +45,9 @@
             }
         },
         watch: {
-
+            Example: function () {
+                this.compare();
+            },    
             Inputed: function () {
                 this.compare();
             },

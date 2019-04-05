@@ -3,15 +3,14 @@
 </template>
 
 <script>
- //   import { TextCreation } from './components/TextCreation.js'; 
+
 import klava from "./components/klava.vue";
 export default {
   name: "app",
   components: {
-    klava
+    klava 
   }
-    };
-   
+    };   
 </script>
 
 <style>

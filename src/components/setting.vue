@@ -51,8 +51,6 @@
                     {
                         this.currentUser = this.users[0];//пока первый пол
                     }
-                    
-
                 }
                 else {//
                     this.users = ['unknown'];//
