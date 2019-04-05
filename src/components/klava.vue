@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="info">
-        <watcher :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
+        <speedometer :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
         <klava-inp :Example="Example" :Inputed="inputedString" align="left"
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
@@ -16,14 +16,14 @@
 <script>
 
     import { GetKvasiText } from "./TextCreation.js";
-    import watcher from "./watcher.vue";
+    import speedometer from "./speedometer.vue";
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
 
     export default {
         name: "Klava",
         components: {
-            klavaInp, watcher, setting
+            klavaInp, speedometer, setting
         },
         props: {
         },
@@ -58,9 +58,9 @@
                 }
                 else {
                     this.running = false;
-                    var currSpeed=this.getSpeed() ;
+                    var currSpeed=this.$store.getters.GET_SPEED; 
                     this.placeholder = 'Your speed is ' + currSpeed+ ' press enter for continue';
-                    this.fixResult=currSpeed;
+                    this.fixResult(currSpeed);
                 }
             },
             nextText: function () {//
@@ -68,12 +68,15 @@
                 this.nextSentationIndex = 0;
                 this.AllExample =  GetKvasiText(this.sentationCount, this.lang);
                 console.log(this.Example);
-            }
-            , getSpeed: function () {
-                return sessionStorage.getItem('speed');
-            }, 
+            },
+            // , fixSpeed: function () {
+            //     return this.$store.getters.GET_SPEED;
+
+            //     //return sessionStorage.getItem('speed');
+            // }, 
             fixResult: function (result) {
                 return sessionStorage.setItem('result',result);
+                //this.inputedCharCount=0;
             }
         },
         computed: {

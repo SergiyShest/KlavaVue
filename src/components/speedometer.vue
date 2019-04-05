@@ -13,6 +13,7 @@
             inputedCharCount: 0,
             errorCount:0
         },
+        
         data() {
             return {
                 timeBegin: 0,
@@ -32,7 +33,7 @@
                 var dat = new Date();
 
                 if (this.inputedCharCount == 0 || this.timeBegin==0) {
-                    //init date first time
+                    //init date first time|| this.timeBegin==0
                     this.timeBegin = dat.getTime();
                     this.tickTime = this.timeBegin;
                 } else {

@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
     speed:0
   },
   getters: {
-    SPEED:  function(state) {
+    GET_SPEED:  state => {
       return state.speed;
     }
   },
