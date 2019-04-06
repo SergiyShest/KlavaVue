@@ -19,6 +19,7 @@
     import speedometer from "./speedometer.vue";
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
+    import { get } from "http";
 
     export default {
         name: "Klava",
@@ -39,9 +40,7 @@
                 sentationCount: 2,
                 lang: 'ru',
                 avaiableLang: ['ru', 'en'],
-                speed: 0,
-                //stopped:false,
-                running: true
+                speed: 0
             };
         },
         methods: {
@@ -51,40 +50,52 @@
             },
             nextSentation: function () {//
                 this.inputedString = '';
-                
-                if (this.nextSentationIndex < this.AllExample.length-1 ) {
+
+                if (this.nextSentationIndex < this.AllExample.length - 1) {
                     this.nextSentationIndex++;
                     this.placeholder = 'nextIndex=' + this.nextSentationIndex + ' ' + this.AllExample.length + '';
                 }
                 else {
-                    this.running = false;
-                    var currSpeed=this.$store.getters.GET_SPEED; 
-                    this.placeholder = 'Your speed is ' + currSpeed+ ' press enter for continue';
+
+                    var currSpeed = this.$store.getters.GET_SPEED;
+                    this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
                     this.fixResult(currSpeed);
                 }
             },
             nextText: function () {//
                 this.running = true;
                 this.nextSentationIndex = 0;
-                this.AllExample =  GetKvasiText(this.sentationCount, this.lang);
+                this.AllExample = GetKvasiText(this.sentationCount, this.lang);
                 console.log(this.Example);
             },
             // , fixSpeed: function () {
             //     return this.$store.getters.GET_SPEED;
 
             //     //return sessionStorage.getItem('speed');
-            // }, 
+            // },
             fixResult: function (result) {
-                return sessionStorage.setItem('result',result);
-                //this.inputedCharCount=0;
+                this.inputedCharCount = 0;
+                this.running = false;
+                return sessionStorage.setItem('result', result);
+
             }
         },
         computed: {
             Example: function () {
                 if (!this.running) { return '' }
                 return this.AllExample[this.nextSentationIndex];
-            }
+            },
+            running: {
+                get:
+                    function () {
+                        return this.$store.getters.GET_RUNNING;
+                    },
 
+                set:
+                    function (newValue) {
+                        this.$store.dispatch('SAVE_RUNNING', newValue);
+                    }
+            }
         },
         beforeMount() {
             //инициализация первый раз

@@ -1,14 +1,15 @@
 ﻿<template>
-    <div class="watcher" >
+    <div class="speedometer">
         <h3>Ошибок: {{ errorCount }}</h3>
         <h3>Введено символов: {{ inputedCharCount }}</h3>
         <h3>Средняя скорость: {{ totalSpeed }}</h3>
-         <h3>скорость {{ currentSpeed }}</h3>
+        <h3>скорость {{ currentSpeed }}</h3>
+        <h3>timeBegin {{ timeBegin }}</h3>
     </div>
 </template>
 <script>
     export default {
-        name: "watcher",
+        name: "speedometer",
         props: {
             inputedCharCount: 0,
             errorCount:0
@@ -48,6 +49,28 @@
                    this.$store.dispatch('SAVE_SPEED', this.totalSpeed);
                 }
             }
+            ,
+            running: function (newValue) {
+                if (newValue) {
+ 
+                    this.timeBegin == 0;
+                    alert(timeBegin);
+                }
+            }
+        }
+        ,
+        computed: {
+            running: {
+                get:
+                    function () {
+                        return this.$store.getters.GET_RUNNING;
+                    },
+
+                set:
+                    function (newValue) {
+                        this.$store.dispatch('SAVE_RUNNING', newValue);
+                    }
+            }
         }
     };
 </script>
@@ -68,7 +91,7 @@
         margin: 0 10px;
     }
 
-    .watcher {
+    .speedometer {
         
         border: 2px;
         border-radius: 2;

@@ -1,11 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\src",
     "\\src\\components",
-    "\\src\\components\\core",
-    "\\tests\\unit"
+    "\\src\\store"
   ],
-  "SelectedNode": "\\src\\components\\TextCreation.js",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }
