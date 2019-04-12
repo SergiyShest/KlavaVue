@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\src",
     "\\src\\components",
     "\\src\\store"
   ],
-  "SelectedNode": "\\src",
+  "SelectedNode": "\\src\\components\\klava.vue",
   "PreviewInSolutionExplorer": false
 }

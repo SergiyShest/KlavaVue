@@ -7,7 +7,8 @@ export const store = new Vuex.Store({
   state: {
       speed: 0,//current Avg speed, updated after ewery key press
       running: true,
-      userAchievementChart:[],//г
+      userResult: 0,
+      userAchievementChart:[],//график достижений пользователя
   },
   getters: {
     GET_SPEED:  state => {
@@ -16,8 +17,8 @@ export const store = new Vuex.Store({
       GET_RUNNING: state => {
           return state.running;
       },
-      GET_RECORD: state => {
-          return state.running;
+      GET_USER_RESULT: state => {
+          return state.userResult;
       },
       GET_USER_ACHIEVEMENT_CHART: state => {
           return state.userAchievementChart;
@@ -30,6 +31,9 @@ export const store = new Vuex.Store({
       SET_RUNNING: (state, payload) => {
           state.running = payload;
       },
+      SET_USER_RESULT: (state, payload) => {
+          state.userResult = payload;
+      },
       SET_USER_ACHIEVEMENT_CHART: (state, payload) => {
           state.userAchievementChart = payload;
       },
@@ -41,6 +45,9 @@ export const store = new Vuex.Store({
       },
       SAVE_RUNNING: async (context, payload) => {
           context.commit('SET_RUNNING', payload);
+      },
+      SAVE_USER_RESULT: async (context, payload) => {
+          context.commit('SET_USER_RESULT', payload);
       },
       SAVE_USER_ACHIEVEMENT_CHART: async (context, payload) => {
            context.commit('SET_USER_ACHIEVEMENT_CHART', payload);

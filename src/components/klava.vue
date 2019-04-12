@@ -20,6 +20,7 @@
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
     import { get } from "http";
+    import { bus } from '../store/bus'
 
     export default {
         name: "Klava",
@@ -32,15 +33,17 @@
         data() {
             return {
                 AllExample: [],
+                speed: 0,
                 placeholder: 'input string above',
                 inputedCharCount: 0,
                 inputedString: '',
                 errorCount: 0,
                 nextSentationIndex: 0,
+                running: true,
+
                 sentationCount: 2,
                 lang: 'ru',
-                avaiableLang: ['ru', 'en'],
-                speed: 0
+                avaiableLang: ['ru', 'en']
             };
         },
         methods: {
@@ -60,24 +63,31 @@
                     var currSpeed = this.$store.getters.GET_SPEED;
                     this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
                     this.fixResult(currSpeed);
+                    console.log(this.placeholder);
                 }
             },
-            nextText: function () {//
+            nextText: function () {//create next text
+                this.$root.$store.dispatch('SAVE_SPEED', 0);//send command in component Speedometr for reset 
                 this.running = true;
+                this.speed = 0;
+                this.placeholder= 'input string above';
+                this.inputedCharCount= 0;
+                this.inputedString = '';
+                this.errorCount = 0;
                 this.nextSentationIndex = 0;
                 this.AllExample = GetKvasiText(this.sentationCount, this.lang);
-                console.log(this.Example);
+
             },
-            // , fixSpeed: function () {
-            //     return this.$store.getters.GET_SPEED;
-
-            //     //return sessionStorage.getItem('speed');
-            // },
             fixResult: function (result) {
-                this.inputedCharCount = 0;
                 this.running = false;
-                return sessionStorage.setItem('result', result);
 
+                var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
+              usAch=usAch.concat( this.$store.getters.GET_SPEED);
+                this.$store.dispatch('SAVE_USER_ACHIEVEMENT_CHART', usAch);//send command in component Speedometr 
+
+                // bus.$emit('stop', result);
+               // bus.$emit('storeResult', result);//create  event
+                console.log('fixResult =>' + usAch);
             }
         },
         computed: {
@@ -85,17 +95,17 @@
                 if (!this.running) { return '' }
                 return this.AllExample[this.nextSentationIndex];
             },
-            running: {
-                get:
-                    function () {
-                        return this.$store.getters.GET_RUNNING;
-                    },
+            //running: {
+            //    get:
+            //        function () {
+            //            return this.$store.getters.GET_RUNNING;
+            //        },
 
-                set:
-                    function (newValue) {
-                        this.$store.dispatch('SAVE_RUNNING', newValue);
-                    }
-            }
+            //    set:
+            //        function (newValue) {
+            //            this.$store.dispatch('SAVE_RUNNING', newValue);
+            //        }
+            //}
         },
         beforeMount() {
             //инициализация первый раз

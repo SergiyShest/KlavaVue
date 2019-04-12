@@ -1,12 +1,13 @@
 ﻿<template>
     <div class="setting">
-        
+
         <h3>Name: {{currentUserResults}} </h3>
         <select v-model="currentUser">
             <option selected>{{currentUser}}</option>
-            <option v-for="user in users" >{{user}}</option>
+            <option v-for="user in users" v-bind:key="user">
+                {{user}}</option>
         </select>
-        <new-setting v-on:usercreated="reloadUsers()" ></new-setting>
+        <new-setting v-on:usercreated="reloadUsers()"></new-setting>
         <!--<h3>language: </h3>
         <select v-model="selectedLang">
             <option selected>русский</option>
@@ -18,37 +19,51 @@
     import newSetting from "./newSetting.vue";
     export default {
         name: "setting",
-        components: { newSetting},
+        components: { newSetting },
         props: {
         }
         , data() {
             return {
-                currentUserResults:[],
+
                 selectedLang: 'русский',
                 currentUser: '',
                 users: []
             }
         }
+        , computed: {
+            currentUserResults: {
+                get:
+                    function () {
+                        return this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
+                    },
+            }
+        }
+
         , watch: {
             selectedLang: function (newVal) {
                 var val = 'en';
                 if (newVal == 'русский') val = 'ru'
                 this.$emit('langChanged', val);;;
-            }
+            },
+            currentUser: function () {
+                localStorage.setItem("currentUser", this.currentUser);
+            },
+            currentUserResults:function() {
+                console.log(this.currentUserResults);
+            },
         }
         , methods: {
             reloadUsers: function () {
                 var usersStr = localStorage.getItem('users');
-              
+
                 usersStr = usersStr.replace("\s+", " ").replace(";+", ';');
-                console.log("1 "+usersStr)
+                console.log("1 " + usersStr)
                 if (usersStr.length > 0) {
                     this.users.length = 0;
                     this.users = usersStr.split(';');
 
                     this.currentUser = localStorage.getItem("currentUser");
-                    if (this.currentUser == null || this.currentUser =="undefinded")
-                    {
+                    if (this.currentUser == null || this.currentUser == "undefinded") {
                         this.currentUser = this.users[0];//пока первый пол
                     }
                 }
@@ -57,34 +72,33 @@
                     this.currentUser = this.users[0];//пока первый пол
                 }
             }
-        },
-        beforeMount() {
+        }
+        , beforeMount() {
             //инициализация первый раз
             this.reloadUsers();
-        },
-        watch: {
-            currentUser: function () {
-                  localStorage.setItem("currentUser", this.currentUser);
-            }
         }
+    }
 
 
 
-    };
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     h3 {
         margin: 4px;
     }
+
     ul {
         list-style-type: none;
         padding: 0;
     }
+
     li {
         display: inline-block;
         margin: 0 10px;
     }
+
     .setting {
         border: 2px;
         border-radius: 2;
