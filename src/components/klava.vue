@@ -82,12 +82,13 @@
                 this.running = false;
 
                 var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
-              usAch=usAch.concat( this.$store.getters.GET_SPEED);
-                this.$store.dispatch('SAVE_USER_ACHIEVEMENT_CHART', usAch);//send command in component Speedometr 
+                usAch=usAch.concat(result);
+
+                this.$store.dispatch('SAVE_USER_ACHIEVEMENT_CHART', usAch);//Save result
 
                 // bus.$emit('stop', result);
                // bus.$emit('storeResult', result);//create  event
-                console.log('fixResult =>' + usAch);
+                console.log('fixResult =>' + usAch+'  '+ result+'----'+this.$store.getters.GET_SPEED);
             }
         },
         computed: {

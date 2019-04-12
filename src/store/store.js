@@ -8,7 +8,7 @@ export const store = new Vuex.Store({
       speed: 0,//current Avg speed, updated after ewery key press
       running: true,
       userResult: 0,
-      userAchievementChart:[],//график достижений пользователя
+      userAchievementChart:[],//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
   },
   getters: {
     GET_SPEED:  state => {

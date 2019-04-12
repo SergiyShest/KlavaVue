@@ -36,6 +36,12 @@
                     function () {
                         return this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
                     },
+                    set:
+                    function (newVal) {
+                         console.log('SAVE_USER_ACHIEVEMENT_CHART<='+newVal);
+                         this.$store.dispatch('SAVE_USER_ACHIEVEMENT_CHART', newVal);//Save result
+                    }
+
             }
         }
 
@@ -50,6 +56,7 @@
             },
             currentUserResults:function() {
                 console.log(this.currentUserResults);
+                localStorage.setItem("currentUserResults",this.currentUserResults);
             },
         }
         , methods: {
@@ -76,6 +83,7 @@
         , beforeMount() {
             //инициализация первый раз
             this.reloadUsers();
+            this.currentUserResults=localStorage.getItem("currentUserResults").split(",");
         }
     }
 
