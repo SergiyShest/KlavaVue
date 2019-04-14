@@ -2,6 +2,7 @@
 var Adjectives = ["пьяный","феерический","эпичный","бородатый","глупый","добрый","красный", "мокрый", "пластилиновый", "умный", "сумашедший"];
 var AddVerbs = ["разнообразно","развратно","неумело","весело", "смешно", "красиво", "честно", "глупо", "криво", "пакостно", "злорадно", "подло"];
 var Verbs = ["пищал","подпрыгивал","скакал","лаял","мылся", "прыгал", "пукал", "восхищался", "насмехался", "ругался", "бесился", "играл", "срал"]
+var Verb = ["пищали","подпрыгивали","скакали","лаяли","мылись", "прыгали", "пукали", "восхищались", "насмехались", "ругались", "бесились", "игрались", "срали", "страхались"]
 
 var NounsW = ["милашка","Вероника","Наташа","Маша","Вика","Симка","Пандочка","Совунья","Нюша","девушка", "крыса", "коза", "лиса", "старуха", "фея", "лягушка", "ссука"];
 var AdjectivesW = ["грязная","потная","похотливая","жадная","пухлая","писклявая","клевая","желтая", "мокрая", "злая", "уродливая", "глупая", "красивая","крохотная","блестящая","милая"];
@@ -79,11 +80,17 @@ function GetSentation3() {
         Word(Adjectives) + ', ' + Word(Adjectives) + ' и ' + Word(Adjectives) + ' ' +
         Word(Nouns) + ' ' +
 
-        
+
         Word(AddVerbs) + ' ' +
         Word(Verbs);
     return s + AddPlace() + '.';
 }
+
+
+
+
+
+
 
  export function GetSentation4() {
     var adjective1 = Word(Adjectives);
@@ -97,6 +104,49 @@ function GetSentation3() {
         Word(Verbs);
     return s + AddPlace() + '.';
 }
+
+
+export function GetSentation5() {
+  var adjective1 = Word(Adjectives);
+    var arr=  [ adjective1];
+    var adjective2= Word(Adjectives,arr);
+    arr=  [ adjective1,adjective2];
+
+    var Noun1 = Word(Nouns);
+    var arr=  [ Noun1];
+    var Noun2= Word(Nouns,arr);
+  
+    var s =
+        adjective1 + ' '+
+        Noun1 + ' и '   + Word(Adjectives,arr) + ' ' + Noun2 + ' '+
+        Word(AddVerbs) + ' ' +
+        Word(Verb);
+    return s + AddPlace() + '.';
+}
+
+
+export function GetSentation6() {
+    var adjective1 = Word(Adjectives);
+      var arr=  [ adjective1];
+      var adjective2= Word(Adjectives,arr);
+      arr=  [ adjective1,adjective2];
+  
+      var Noun1 = Word(Nouns);
+      var arr=  [ Noun1];
+      var Noun2= Word(Nouns,arr);
+    
+      var s =
+          adjective1 +   ' ' +Noun1+ 
+           ' и ' + 
+           adjective2 + ' '  + Noun2 + ' '+
+          Word(AddVerbs) + ' ' +
+          Word(Verb);
+      return s + AddPlace() + '.';
+  }
+  
+  
+
+
 //place and preposition (in or on)
 
  export function AddPlace() {
