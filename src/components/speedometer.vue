@@ -59,12 +59,20 @@
             totalSpeed: {
                 get:
                     function () {
-                        return this.$store.getters.GET_SPEED;
+
+                        const res=  this.$store.getters.GET_SPEED.toString();
+                        if(res==null)
+                     {return 0;} else
+                     {
+                      var srt_arr=res.split(',');
+                      return parseInt( srt_arr[0]);
+                     }
+
                     },
 
                 set:
                     function (newValue) {
-                        this.$store.dispatch('SAVE_SPEED', newValue);
+                        this.$store.dispatch('SAVE_SPEED', newValue+'/'+this.errorCount);
                         //console.log("totalSpeedStored=>" + newValue)
                     }
             }
@@ -83,13 +91,11 @@
                 } else {
                     var tick = timeNow.getTime() - this.tickTime;
                     var tickFromBegin = timeNow.getTime() - this.timeBegin;
-                    // console.log('tick=' + tickFromBegin + ' time=' + tick+'  timeBegin='+60/(tick/1000));
+                   
                     this.currentSpeed = this.getMin(tick, 1);//
                     this.totalSpeed = this.getMin(tickFromBegin, this.inputedCharCount);
-                    this.tickTime = timeNow.getTime();//save time
-                    // console.log(this.totalSpeed);
-                    // sessionStorage.setItem('speed', this.totalSpeed);
-                  // this.$store.dispatch('SAVE_SPEED', this.totalSpeed);
+                    this.tickTime = timeNow.getTime();//save time for next
+
                 }
             }
             ,
@@ -98,7 +104,7 @@
             },
             totalSpeed: function (newValue) {
                 console.log("totalSpeed=>" + newValue)
-                if (this.totalSpeed == 0) {
+                if (this.totalSpeed == '0') {
                     this.startNew();
                 }
             }

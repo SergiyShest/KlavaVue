@@ -61,7 +61,9 @@
                 else {
 
                     var currSpeed = this.$store.getters.GET_SPEED;
-                    this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
+                     this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
+
+                     
                     this.fixResult(currSpeed);
                     console.log(this.placeholder);
                 }
@@ -80,7 +82,7 @@
             },
             fixResult: function (result) {
                 this.running = false;
-
+               // const userAchivment= [{date:timeNow.getTime(),Errors:error,Speed:result}]
                 var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
                 usAch=usAch.concat(result);
 
