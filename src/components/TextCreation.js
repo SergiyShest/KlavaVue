@@ -12,6 +12,8 @@ var PlasesIn = ["помойке", "проруби", "шкафу","ведре", "
 
 var PlasesOn = ["полу","травке","балконе", "крыше", "лужайке", "марсе", "луне", "земле", "жаре", "холоде", "столе", "скамейке", "посту", "шкафу"]
 
+var PlasesUnder = ["одеялом","столом","окном", "крышей", "землей", "кроватью", "машиной", "присягой", "танком", "шафе", "градусом", "скамейкой", "подушкой", "деревом"]
+
 function Word(arr, exclude = null) {
     var ind = Math.floor(Math.random() * arr.length);//random digit in range 0-arr.length
     var word = arr[ind];
@@ -24,16 +26,16 @@ function Word(arr, exclude = null) {
     return word;
 }
 
-function TRANSLATE(txt, dir = "ru-en") {
+export function TRANSLATE(txt, dir = "ru-en") {
     var request = new XMLHttpRequest();
     var text = encodeURIComponent(txt);
     var key = "trnsl.1.1.20190324T133417Z.c2eddb7568471f8d.219fc4005536b04ae17e029f51e3438ac66e5001";
     var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + key + "&text=" + text + "&lang=" + dir + "&format=plain&options=1"
     request.open('GET', url, false);
     request.send();
-    console.log(request.response);
+   // console.log(request.response);
     if (request.status >= 200 && request.status < 400) {
-        console.log(request);
+       // console.log(request);
         var data = JSON.parse(request.responseText);
         return data.text;
     }
@@ -76,25 +78,46 @@ function GetSentation3() {
     var s =
         Word(Adjectives) + ', ' + Word(Adjectives) + ' и ' + Word(Adjectives) + ' ' +
         Word(Nouns) + ' ' +
+
+        
+        Word(AddVerbs) + ' ' +
+        Word(Verbs);
+    return s + AddPlace() + '.';
+}
+
+ export function GetSentation4() {
+    var adjective1 = Word(Adjectives);
+    var arr=  [ adjective1];
+    var adjective2= Word(Adjectives,arr);
+    arr=  [ adjective1,adjective2];
+    var s =
+        adjective1 + ', ' + adjective2 + ' и ' + Word(Adjectives,arr) + ' ' +
+        Word(Nouns) + ' ' +
         Word(AddVerbs) + ' ' +
         Word(Verbs);
     return s + AddPlace() + '.';
 }
 //place and preposition (in or on)
 
-function AddPlace() {
-    var ind = Math.floor(Math.random() * 2);
+ export function AddPlace() {
+    var ind = Math.floor(Math.random() * 3);
     if (ind == 0) { return ' на ' + Word(PlasesOn); }
-    else { return ' в ' + Word(PlasesIn); }
+    if (ind == 1)  {  return ' в ' + Word(PlasesIn); } 
+    if (ind == 2)  {  return ' под ' + Word(PlasesUnder); }
+
+
 }
 //получение случайного предложения
 function GetSentation(short = false) {
-    if (short) return Word(Nouns);
+   
+    if (short) return Word(Nouns);//режим для теста
+
     var sentence = GetSentationW();
-    var sentType = Math.floor(Math.random() * 4);//
+    var sentType = Math.floor(Math.random() * 4);//получаю случайное число от 0 до 3
    if (sentType == 0) sentence = GetSentationM();
-    if (sentType == 1) sentence = GetSentationW();
-   if (sentType == 2) sentence = GetSentation3();
+   if (sentType == 1) sentence = GetSentationW();
+   if (sentType == 2) sentence = GetSentationW();
+   if (sentType == 3) sentence = GetSentation3();
     var sentence = sentence[0].toUpperCase() + sentence.substr(1, sentence.length);
     return sentence;
 }
@@ -114,5 +137,5 @@ function KvasiText(count, lang,short) {
 }
 
 export function GetKvasiText(count, lang,short) {
-    return KvasiText(count, lang,short=true);
+    return KvasiText(count, lang,short);
 }
