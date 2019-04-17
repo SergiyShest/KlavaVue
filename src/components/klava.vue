@@ -90,7 +90,7 @@
 
                 // bus.$emit('stop', result);
                // bus.$emit('storeResult', result);//create  event
-                console.log('fixResult =>' + usAch+'  '+ result+'----'+this.$store.getters.GET_SPEED);
+             //   console.log('fixResult =>' + usAch+'  '+ result+'----'+this.$store.getters.GET_SPEED);
             }
         },
         computed: {
