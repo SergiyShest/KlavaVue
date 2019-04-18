@@ -9,7 +9,6 @@
 <script>
     export default {
         name: "klvaInp",
-
         props: {
             Inputed: String,
             Example: String
@@ -68,7 +67,6 @@
         },
         beforeMount() {
             this.compare();
-
         }
     }
 </script>

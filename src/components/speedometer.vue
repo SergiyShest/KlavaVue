@@ -1,15 +1,15 @@
 ﻿<template>
     <div class="speedometer">
-        <h3>Ошибок: {{ state }}</h3>
+        <!--<h3>Ошибок: {{ state }}</h3>-->
         <h3>Ошибок: {{ errorCount }}</h3>
         <h3>Введено символов: {{ inputedCharCount }}</h3>
         <h3>Средняя скорость: {{ totalSpeed }}</h3>
-        <h3>скорость {{ currentSpeed }}</h3>
-        <h3>timeBegin {{ timeBegin }}</h3>
+        <!--<h3>скорость {{ currentSpeed }}</h3>-->
+        <!--<h3>timeBegin {{ timeBegin }}</h3>-->
     </div>
 </template>
 <script>
-    import { bus } from '../store/bus'
+   // import { bus } from '../store/bus'
     //this compontonent measured time beetwin key press, calculated avg speed  show  and  store
     export default {
         name: "speedometer",
@@ -22,24 +22,21 @@
             return {
                 timeBegin: 0,
                 currentSpeed: 0,
-                tickTime: 0,
-                state: ''
+                tickTime: 0
             }
         }
         ,
         methods: {
+            //take avg speed in min
             getMin: function (milliSec, count) {
                 return Math.round(60 / ((milliSec / count) / 1000), 10);
             },
-            startNew: function () {
 
+            startNewMeasuuring: function () {
                 this.timeBegin = 0;
                 this.totalSpeed = 0;
                 this.tickTime = 0;
                 this.running = true;
-                console.log('start New ' );
-                this.state = "startNew"
-
             }
         }
         ,
@@ -59,7 +56,7 @@
             totalSpeed: {
                 get:
                     function () {
-
+                        //get from 
                         const res=  this.$store.getters.GET_SPEED.toString();
                         if(res==null)
                      {return 0;} else
@@ -67,13 +64,11 @@
                       var srt_arr=res.split(',');
                       return parseInt( srt_arr[0]);
                      }
-
                     },
 
                 set:
                     function (newValue) {
                         this.$store.dispatch('SAVE_SPEED', newValue+'/'+this.errorCount);
-                        //console.log("totalSpeedStored=>" + newValue)
                     }
             }
 
@@ -81,6 +76,7 @@
         ,
         watch: {
             inputedCharCount: function (newVal) {
+//start meashure  when inputing char count changed
                 if (this.running == false) return;
                 var timeNow = new Date();
 
@@ -99,13 +95,13 @@
                 }
             }
             ,
-            running: function (newValue) {
-                console.log("running=>" + newValue)
-            },
+            //running: function (newValue) {
+            //    console.log("running=>" + newValue)
+            //},
             totalSpeed: function (newValue) {
                 console.log("totalSpeed=>" + newValue)
                 if (this.totalSpeed == '0') {
-                    this.startNew();
+                    this.startNewMeasuuring();
                 }
             }
         }
@@ -133,16 +129,16 @@
         //        alert('start');
         //    }
         //    );
-        //    bus.$on('startNew', function (root) {
-        //        //this.startNew();
+        //    bus.$on('startNewMeasuuring', function (root) {
+        //        //this.startNewMeasuuring();
         //        //this.timeBegin = 0;
         //        //this.currentSpeed = 0;
         //        //this.totalSpeed = 0;
         //        //root.$store.dispatch('SAVE_SPEED', 0);
         //        //this.tickTime = 0;
         //        //this.running = true;
-        //        //console.log('startNew totalSpeed=' + this.totalSpeed);
-        //        //this.state = "startNew"
+        //        //console.log('startNewMeasuuring totalSpeed=' + this.totalSpeed);
+        //        //this.state = "startNewMeasuuring"
 
         //    }
         //    );

@@ -10,7 +10,7 @@
                align="left" />
         <br />
         <setting v-on:langChanged="changeLang($event)" />
-
+        <!--<chart :width="300" :height="50" :result="currentUserResults" />-->
     </div>
 </template>
 <script>
