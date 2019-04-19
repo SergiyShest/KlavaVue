@@ -171,7 +171,7 @@ export function GetSentation7() {
       var Noun2= Word(Nouns,arr);
     
       var s =
-          adjective1 + ' ' +Word(Proff) + ' '+Noun1+ ' и ' +Proff1+ ' ' + Noun2 +'  '+Word(Аctions) +' '+ Word(PlasesItems)+' и '+Word(AddVerbs)+ ' ' + Word(Verb)+ ' ';
+          adjective1 + ' ' +Word(Proff) + ' '+Noun1+ ' и ' +Proff1+ ' ' + Noun2 +'  '+Word(AddVerbs) +' '+ Word(PlasesItems)+' и '+Word(AddVerbs)+ ' ' + Word(Verb)+ ' ';
       return s + AddPlace() + '.';
   }
   
