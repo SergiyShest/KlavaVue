@@ -1,10 +1,10 @@
 //import { shallowMount } from "@vue/test-utils";
-import { GetKvasiText, AddPlace, GetSentation5 } from "@/components/TextCreation.js";
+import { GetKvasiText, AddPlace, GetSentation7 } from "@/components/TextCreation.js";
 
 describe("GetKvasiTextTest", () => {
   it("Visual See text 5 times", () => {
-    for (let index = 0; index < 5; index++) {
-      var wrapper = GetSentation5();
+    for (let index = 0; index < 20; index++) {
+      var wrapper = GetSentation7();
       // eslint-disable-next-line no-console
        console.log(wrapper);
     }
