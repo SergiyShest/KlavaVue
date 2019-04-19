@@ -85,6 +85,7 @@
     .inputStr {
        width:100%;
         font-size: 40px;
+        text-align:left;
         background-color: rgb(212, 212, 236);
         
     }

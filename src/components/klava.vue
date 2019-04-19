@@ -9,8 +9,10 @@
                v-bind:placeholder="placeholder"
                align="left" />
         <br />
-        <setting v-on:langChanged="changeLang($event)" />
-        <!--<chart :width="300" :height="50" :result="currentUserResults" />-->
+        <div class="row">
+            <setting class="column" v-on:langChanged="changeLang($event)" style="width:auto"/>
+            <chart class="column" style="min-width:80%" />
+        </div>
     </div>
 </template>
 <script>
@@ -19,13 +21,14 @@
     import speedometer from "./speedometer.vue";
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
+    import chart from "./klavaChart.vue";
     import { get } from "http";
     import { bus } from '../store/bus'
 
     export default {
         name: "Klava",
         components: {
-            klavaInp, speedometer, setting
+            klavaInp, speedometer, setting, chart
         },
         props: {
         },
@@ -61,19 +64,19 @@
                 else {
 
                     var currSpeed = this.$store.getters.GET_SPEED;
-                     this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
+                    this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
 
-                     
+
                     this.fixResult(currSpeed);
                     console.log(this.placeholder);
                 }
             },
             nextText: function () {//create next text
-                this.$root.$store.dispatch('SAVE_SPEED', 0);//send command in component Speedometr for reset 
+                this.$root.$store.dispatch('SAVE_SPEED', 0);//send command in component Speedometr for reset
                 this.running = true;
                 this.speed = 0;
-                this.placeholder= 'input string above';
-                this.inputedCharCount= 0;
+                this.placeholder = 'input string above';
+                this.inputedCharCount = 0;
                 this.inputedString = '';
                 this.errorCount = 0;
                 this.nextSentationIndex = 0;
@@ -82,15 +85,15 @@
             },
             fixResult: function (result) {
                 this.running = false;
-               // const userAchivment= [{date:timeNow.getTime(),Errors:error,Speed:result}]
+                // const userAchivment= [{date:timeNow.getTime(),Errors:error,Speed:result}]
                 var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
-                usAch=usAch.concat(result);
+                usAch = usAch.concat(result);
 
                 this.$store.dispatch('SAVE_USER_ACHIEVEMENT_CHART', usAch);//Save result
 
                 // bus.$emit('stop', result);
-               // bus.$emit('storeResult', result);//create  event
-             //   console.log('fixResult =>' + usAch+'  '+ result+'----'+this.$store.getters.GET_SPEED);
+                // bus.$emit('storeResult', result);//create  event
+                //   console.log('fixResult =>' + usAch+'  '+ result+'----'+this.$store.getters.GET_SPEED);
             }
         },
         computed: {
@@ -118,4 +121,21 @@
     }
 
 </script>
+<style>
+
+
+    .column {
+        float: left;
+        padding: 0px;
+        /* width: 50%;  height: 300px; Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
 

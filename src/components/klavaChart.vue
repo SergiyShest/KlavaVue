@@ -1,74 +1,61 @@
 <template>
-    <div>
-        <chart :chartdata="chartdata" />
-   </div>    
+    <div style="height:80px">
+        <chart :chartdata="chartdata"  :height="100" />
+    </div>
 </template>
 <script>
-//import { Bar } from 'vue-chartjs' :width="300" :height="50"
-import chart from "./core/Charts.js";
-import {
-    LoadUserAchivment,
-    SaveUserAchivment
-} from "./settingFunctions.js";
-export default {
-    //extends: Bar,
-    name: "klvaChart",
-    components: {
-        newSetting,
-        chart
-    },
-    data: function () {
-        return {
-            result: ["33/3", "13/3", "53/3"],
-            options: {
-                type: Object,
-                default: null
+    import chart from "./core/Charts.js";
+
+    export default {
+
+        name: "klvaChart",
+        components: {
+            chart
+        },
+        data: function () {
+            return {
+
+                options: {
+                    type: Object,
+                    default: null
+                }
             }
-        }
-    },
+        },
 
-    computed: {
-        chartdata: function () {
-            var data = {
-                labels: [],
-                datasets: [{
-                    label: 'Results',
-                    backgroundColor: '#0079ff',
-                    data: []
-                },
-                {
-                    label: 'Errors',
-                    backgroundColor: '#f87979',
-                    data: []
-                },
-                ]
+        computed: {
+            chartdata: function () {
+                var data = {
+                    labels: [],
+                    datasets: [{
+                        label: 'Results',
+                        backgroundColor: '#0079ff',
+                        data: []
+                    },
+                    {
+                        label: 'Errors',
+                        backgroundColor: '#f87979',
+                        data: []
+                    },
+                    ]
+                }
+                const result = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
+                console.log(result);
+                result.forEach(x => {
+                    var arrR = x.split('/');
+                    var res = parseInt(arrR[0]);
+                    var err = parseInt(arrR[1]) * 10;
+
+                    data.datasets[0].data.push(res);
+                    data.datasets[1].data.push(err);
+
+                });
+                for (var i = 0; i < 100; i++) {
+                    data.labels.push(i);
+                }
+
+                return data;
             }
-                ;
-
-            this.result.forEach(x => {
-                var arrR = x.split('/');
-                var res = parseInt(arrR[0]);
-                var err = parseInt(arrR[1]) * 10;
-
-                data.datasets[0].data.push(res);
-                data.datasets[1].data.push(err);
-
-            });
-            for (var i = 0; i < 100; i++) {
-                data.labels.push(i);
-            }
-
-            return data;
         }
     }
-    //,
-    //mounted() {
-    //    this.renderChart(this.chartdata, this.options)
-    //},
-    //watch: {
-    //    chartdata: function () {
-    //        this.renderChart(this.chartdata, this.options);
-    //    }
-    //}
-}
+
 </script>

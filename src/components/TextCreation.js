@@ -113,6 +113,6 @@ function KvasiText(count, lang,short) {
     return arr;
 }
 
-export function GetKvasiText(count, lang,short) {
-    return KvasiText(count, lang,short=true);
+export function GetKvasiText(count, lang,short=false) {
+    return KvasiText(count, lang,short);
 }

@@ -1,13 +1,13 @@
 ﻿<template>
     <div class="setting">
-        <h3>result: {{currentUserResults}}</h3>
+        <!--<h3>result: {{currentUserResults}}</h3>-->
         <select v-model="currentUser">
             <option selected>{{currentUser}}</option>
             <option v-for="user in users" v-bind:key="user">{{user}}</option>
         </select>
         <new-setting v-on:usercreated="reloadUsers()"></new-setting>
-        <chart :width="300" :height="50" :result="currentUserResults" />
-        <!--<h3>language: </h3>
+        <!--<chart :width="300" :height="50" :result="currentUserResults" />
+       <h3>language: </h3>
         <select v-model="selectedLang">
             <option selected>русский</option>
             <option>english</option>
@@ -17,7 +17,7 @@
 
 <script>
     import newSetting from "./newSetting.vue";
-    import chart from "./klavaChart.vue";
+    //import chart from "./klavaChart.vue";
     import {
         LoadUserAchivment,
         SaveUserAchivment
@@ -26,7 +26,7 @@
         name: "setting",
         components: {
             newSetting,
-            chart
+  //          chart
         },
         props: {},
         data() {
@@ -94,8 +94,9 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
-<style scoped>
+<style scoped >
     h3 {
+      
         margin: 4px;
     }
 

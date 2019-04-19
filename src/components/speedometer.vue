@@ -1,9 +1,9 @@
 ﻿<template>
-    <div class="speedometer">
+    <div class="row">
         <!--<h3>Ошибок: {{ state }}</h3>-->
-        <h3>Ошибок: {{ errorCount }}</h3>
-        <h3>Введено символов: {{ inputedCharCount }}</h3>
-        <h3>Средняя скорость: {{ totalSpeed }}</h3>
+        <h4 class="column">Ошибок: {{ errorCount }}</h4>
+        <h4 class="column">Введено символов: {{ inputedCharCount }}</h4>
+        <h4 class="column">Средняя скорость: {{ totalSpeed }}</h4>
         <!--<h3>скорость {{ currentSpeed }}</h3>-->
         <!--<h3>timeBegin {{ timeBegin }}</h3>-->
     </div>
@@ -153,13 +153,14 @@
     };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style >
 
-    h3 {
-        margin: 4px;
+    h4 {
+        margin: 2px;
+       
     }
 
-    ul {
+    /*ul {
         list-style-type: none;
         padding: 0;
     }
@@ -170,10 +171,28 @@
     }
 
     .speedometer {
+        float:none;
         border: 2px;
         border-radius: 2;
         border-width: 2px;
         color: #42b983;
         text-align: left;
+       
+        margin:5px;
+        padding-bottom:2px;
+    }*/
+    .column {
+        float: left;
+        padding: 0px;
+
+        /* width: 50%;  height: 300px; Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        background-color: gold;
+        content: "";
+        display: table;
+        clear: both;
     }
 </style>
