@@ -5,10 +5,11 @@
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
                    v-on:ok="inputedCharCount++" />
-        <input class="inputStr" type="text" v-model="inputedString" v-on:keyup.enter="nextText()" autofocus
+        <input class="inputStr" type="text" v-model="inputedString" v-on:keyup.enter="nextText()"  v-on:keyup="keymonitor"   autofocus
                v-bind:placeholder="placeholder"
                align="left" />
         <br />
+        <buttons :char="char"/>
         <div class="row">
             <setting class="column" v-on:langChanged="changeLang($event)" style="width:auto"/>
             <chart class="column" style="min-width:80%" />
@@ -22,13 +23,14 @@
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
     import chart from "./klavaChart.vue";
+    import buttons from "./buttons.vue";
     import { get } from "http";
     import { bus } from '../store/bus'
 
     export default {
         name: "Klava",
         components: {
-            klavaInp, speedometer, setting, chart
+            klavaInp, speedometer, setting, chart,buttons
         },
         props: {
         },
@@ -43,13 +45,17 @@
                 errorCount: 0,
                 nextSentationIndex: 0,
                 running: true,
-
+                char:null,
                 sentationCount: 2,
                 lang: 'ru',
                 avaiableLang: ['ru', 'en']
             };
         },
         methods: {
+            keymonitor: function (event) {
+                console.log(event.key);
+                this.char = event.key;
+            },
             changeLang: function (e) {
                 this.lang = e;
                 this.AllExample = GetKvasiText(this.sentationCount, this.lang);

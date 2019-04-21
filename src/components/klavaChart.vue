@@ -7,21 +7,18 @@
     import chart from "./core/Charts.js";
 
     export default {
-
         name: "klvaChart",
         components: {
             chart
         },
         data: function () {
             return {
-
                 options: {
                     type: Object,
                     default: null
                 }
             }
         },
-
         computed: {
             chartdata: function () {
                 var data = {
@@ -37,7 +34,7 @@
                         data: []
                     },
                     ]
-                }
+                };
                 const result = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
                 console.log(result);
                 result.forEach(x => {
