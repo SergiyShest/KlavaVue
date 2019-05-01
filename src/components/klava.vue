@@ -4,12 +4,17 @@
         <klava-inp :Example="Example" :Inputed="inputedString" align="left"
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
-                   v-on:ok="inputedCharCount++" />
-        <input class="inputStr" type="text" v-model="inputedString" v-on:keyup.enter="nextText()"  v-on:keyup="keymonitor"   autofocus
+                   v-on:ok="setNextChar($event)" />
+        <input class="inputStr" type="text" 
+               v-model="inputedString" 
+               v-on:keyup.enter="nextText()"  
+               v-on:keydown="charDown=$event" 
+               v-on:keyup="charUp=$event"   
+               autofocus
                v-bind:placeholder="placeholder"
                align="left" />
         <br />
-        <buttons :char="char"/>
+        <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
         <div class="row">
             <setting class="column" v-on:langChanged="changeLang($event)" style="width:auto"/>
             <chart class="column" style="min-width:80%" />
@@ -34,7 +39,6 @@
         },
         props: {
         },
-
         data() {
             return {
                 AllExample: [],
@@ -45,7 +49,9 @@
                 errorCount: 0,
                 nextSentationIndex: 0,
                 running: true,
-                char:null,
+                charDown: null,
+                charUp: null,
+                nextChar: null,
                 sentationCount: 2,
                 lang: 'ru',
                 avaiableLang: ['ru', 'en']
@@ -54,7 +60,7 @@
         methods: {
             keymonitor: function (event) {
                 console.log(event.key);
-                this.char = event.key;
+                this.char = event;
             },
             changeLang: function (e) {
                 this.lang = e;
@@ -100,6 +106,11 @@
                 // bus.$emit('stop', result);
                 // bus.$emit('storeResult', result);//create  event
                 //   console.log('fixResult =>' + usAch+'  '+ result+'----'+this.$store.getters.GET_SPEED);
+            }
+            ,setNextChar: function (param)
+            {
+                this.inputedCharCount++;
+                this.nextChar = param.toLowerCase();
             }
         },
         computed: {

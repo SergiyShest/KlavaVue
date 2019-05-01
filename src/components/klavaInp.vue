@@ -60,7 +60,7 @@
                 if (this.Example.length <= this.okText.length) {
                     this.$emit('next');//create next event when Example is over
                 } else {
-                    this.$emit('ok');
+                    this.$emit('ok', this.Example[this.okText.length]);
                 }
 
             }
