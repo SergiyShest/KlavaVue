@@ -95,9 +95,7 @@
                 }
             }
             ,
-            //running: function (newValue) {
-            //    console.log("running=>" + newValue)
-            //},
+
             totalSpeed: function (newValue) {
                 console.log("totalSpeed=>" + newValue)
                 if (this.totalSpeed == '0') {
@@ -106,50 +104,7 @@
             }
         }
         ,
-        //computed: {
-        //    running: {
-        //        get:
-        //            function () {
-        //                return this.$store.getters.GET_RUNNING;
-        //            },
-        //        set:
-        //            function (newValue) {
-        //                this.$store.dispatch('SAVE_RUNNING', newValue);
-        //            }
-        //    }*
-        //}
-        //,
-        //created: function () {
-        //    bus.$on('stop', function () {
-        //        this.running = false;
-        //        console.log('stop running=' + this.running);
-        //        this.state = "stop"
-        //    });
-        //    bus.$on('start', function () {
-        //        alert('start');
-        //    }
-        //    );
-        //    bus.$on('startNewMeasuuring', function (root) {
-        //        //this.startNewMeasuuring();
-        //        //this.timeBegin = 0;
-        //        //this.currentSpeed = 0;
-        //        //this.totalSpeed = 0;
-        //        //root.$store.dispatch('SAVE_SPEED', 0);
-        //        //this.tickTime = 0;
-        //        //this.running = true;
-        //        //console.log('startNewMeasuuring totalSpeed=' + this.totalSpeed);
-        //        //this.state = "startNewMeasuuring"
-
-        //    }
-        //    );
-        //    bus.$on('storeResult', function (result) {
-        //        console.log('store =' + result);
-        //        sessionStorage.setItem("result", result);
-        //        this.state = "storeResult"
-        //    }
-        //    );
-
-        //}
+     
     };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -160,27 +115,6 @@
        
     }
 
-    /*ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    .speedometer {
-        float:none;
-        border: 2px;
-        border-radius: 2;
-        border-width: 2px;
-        color: #42b983;
-        text-align: left;
-       
-        margin:5px;
-        padding-bottom:2px;
-    }*/
     .column {
         float: left;
         padding: 0px;

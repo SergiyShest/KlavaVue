@@ -5,18 +5,18 @@
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
                    v-on:ok="setNextChar($event)" />
-        <input class="inputStr" type="text" 
-               v-model="inputedString" 
-               v-on:keyup.enter="nextText()"  
-               v-on:keydown="charDown=$event" 
-               v-on:keyup="charUp=$event"   
+        <input class="inputStr" type="text"
+               v-model="inputedString"
+               v-on:keyup.enter="nextText()"
+               v-on:keydown="charDown=$event"
+               v-on:keyup="charUp=$event"
                autofocus
                v-bind:placeholder="placeholder"
                align="left" />
         <br />
         <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
         <div class="row">
-            <setting class="column" v-on:langChanged="changeLang($event)" style="width:auto"/>
+            <setting class="column" v-on:langChanged="changeLang($event)" style="width:auto" />
             <chart class="column" style="min-width:80%" />
         </div>
     </div>
@@ -35,7 +35,7 @@
     export default {
         name: "Klava",
         components: {
-            klavaInp, speedometer, setting, chart,buttons
+            klavaInp, speedometer, setting, chart, buttons
         },
         props: {
         },
@@ -52,20 +52,17 @@
                 charDown: null,
                 charUp: null,
                 nextChar: null,
-                sentationCount: 2,
+                sentationCount: 1,
                 lang: 'ru',
                 avaiableLang: ['ru', 'en']
             };
         },
         methods: {
-            keymonitor: function (event) {
-                console.log(event.key);
-                this.char = event;
-            },
             changeLang: function (e) {
                 this.lang = e;
                 this.AllExample = GetKvasiText(this.sentationCount, this.lang);
-            },
+            }
+            ,
             nextSentation: function () {//
                 this.inputedString = '';
 
@@ -82,7 +79,8 @@
                     this.fixResult(currSpeed);
                     console.log(this.placeholder);
                 }
-            },
+            }
+            ,
             nextText: function () {//create next text
                 this.$root.$store.dispatch('SAVE_SPEED', 0);//send command in component Speedometr for reset
                 this.running = true;
@@ -93,48 +91,43 @@
                 this.errorCount = 0;
                 this.nextSentationIndex = 0;
                 this.AllExample = GetKvasiText(this.sentationCount, this.lang);
+                this.nextChar = this.AllExample[0][0].toLowerCase(); 
 
-            },
+            }
+            ,
             fixResult: function (result) {
                 this.running = false;
-                // const userAchivment= [{date:timeNow.getTime(),Errors:error,Speed:result}]
+                this.nextChar='=-=';//this reset highLight button
                 var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
                 usAch = usAch.concat(result);
-
                 this.$store.dispatch('SAVE_USER_ACHIEVEMENT_CHART', usAch);//Save result
-
-                // bus.$emit('stop', result);
-                // bus.$emit('storeResult', result);//create  event
-                //   console.log('fixResult =>' + usAch+'  '+ result+'----'+this.$store.getters.GET_SPEED);
             }
-            ,setNextChar: function (param)
-            {
+            ,
+            setNextChar: function (param) {
                 this.inputedCharCount++;
                 this.nextChar = param.toLowerCase();
             }
-        },
+        }
+        ,
         computed: {
             Example: function () {
                 if (!this.running) { return '' }
                 return this.AllExample[this.nextSentationIndex];
-            },
-            //running: {
-            //    get:
-            //        function () {
-            //            return this.$store.getters.GET_RUNNING;
-            //        },
-
-            //    set:
-            //        function (newValue) {
-            //            this.$store.dispatch('SAVE_RUNNING', newValue);
-            //        }
-            //}
+            }
         },
         beforeMount() {
+           
             //инициализация первый раз
             this.AllExample = GetKvasiText(this.sentationCount, this.lang);
+            //highLight first char in
+            this.nextChar = this.AllExample[0][0].toLowerCase();
+           // this.setNextChar(firstChar);
+        },
+        afterMount() {
+            //highLight first char in
+          //  var firstChar = this.AllExample[0][0];
+          //  this.setNextChar(firstChar);
         }
-
     }
 
 </script>
@@ -149,7 +142,6 @@
 
     /* Clear floats after the columns */
     .row:after {
-        
         content: "";
         display: table;
         clear: both;

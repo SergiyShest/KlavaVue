@@ -1,10 +1,10 @@
 ﻿<template>
     <div class="setting">
-        <!--<h3>result: {{currentUserResults}}</h3>-->
-        <select v-model="currentUser">
+      <Table><tr><td><h3>User:</h3></td><td><select v-model="currentUser">
             <option selected>{{currentUser}}</option>
             <option v-for="user in users" v-bind:key="user">{{user}}</option>
-        </select>
+        </select></td></tr> </Table> 
+        
         <new-setting v-on:usercreated="reloadUsers()"></new-setting>
         <!--<chart :width="300" :height="50" :result="currentUserResults" />
        <h3>language: </h3>

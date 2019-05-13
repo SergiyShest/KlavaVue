@@ -74,17 +74,20 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
     .gr {
+
         color: #42b983;
         background-color: rgb(212, 212, 236);
     }
 
     .re {
         color: #fff;
+ 
         background-color: rgb(243, 18, 2);
     }
     .inputStr {
        width:100%;
-        font-size: 40px;
+       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 42px;
         text-align:left;
         background-color: rgb(212, 212, 236);
         
