@@ -6,18 +6,17 @@
         </select></td></tr> </Table> 
         
         <new-setting v-on:usercreated="reloadUsers()"></new-setting>
-        <!--<chart :width="300" :height="50" :result="currentUserResults" />
        <h3>language: </h3>
         <select v-model="selectedLang">
             <option selected>русский</option>
             <option>english</option>
-    </select>-->
+    </select>
     </div>
 </template>
 
 <script>
     import newSetting from "./newSetting.vue";
-    //import chart from "./klavaChart.vue";
+    
     import {
         LoadUserAchivment,
         SaveUserAchivment
@@ -25,8 +24,7 @@
     export default {
         name: "setting",
         components: {
-            newSetting,
-  //          chart
+            newSetting
         },
         props: {},
         data() {
@@ -62,32 +60,29 @@
             }
         },
         methods: {
-            reloadUsers: function () {
+            //load All Users and 
+            LoadAllUsersNames: function () {
                 var usersStr = localStorage.getItem("users");
                 if (usersStr == null) usersStr = "";
-                usersStr = usersStr.replace("s+", " ").replace(";+", ";");
-                console.log("1 " + usersStr);
-                if (usersStr.length > 0) {
+                usersStr = usersStr.replace("s+", " ").replace(";+", ";");//remove white space
+             if (usersStr.length > 0) {
                     this.users.length = 0;
                     this.users = usersStr.split(";");
-                    this.currentUser = localStorage.getItem("currentUser");
-                    if (this.currentUser == null || this.currentUser == "undefinded") {
-                        this.currentUser = this.users[0]; //пока первый пол
-                    }
                 } else {
-                    //
-                    this.users = ["unknown"]; //
-                    this.currentUser = this.users[0]; //пока первый пол
+                    this.users = new Array(); //Create empty Array
                 }
+            },
+            LoadCurrUser: function () {
+                this.currentUser = LoadCurrUser(this.users);
             },
             LoadCurrUserResult: function () {
                 this.currentUserResults = LoadUserAchivment(this.currentUser);
-
             }
         },
         beforeMount() {
             //инициализация при загрузке
-            this.reloadUsers();
+            this.LoadAllUsersNames();
+
             this.LoadCurrUserResult();
         }
     };
@@ -96,7 +91,6 @@
 
 <style scoped >
     h3 {
-      
         margin: 4px;
     }
 

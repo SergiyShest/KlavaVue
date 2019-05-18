@@ -47,9 +47,11 @@ export function TRANSLATE(txt, dir = "ru-en") {
     request.send();
    // console.log(request.response);
     if (request.status >= 200 && request.status < 400) {
-       // console.log(request);
+      //  console.log(request);
         var data = JSON.parse(request.responseText);
-        return data.text;
+        var  res= data.text[0];
+       // console.log(res);
+        return res;
     }
 };
 

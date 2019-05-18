@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\tests",
+    "\\tests\\unit"
   ],
-  "SelectedNode": "\\package.json",
+  "SelectedNode": "\\tests\\unit\\SettingsTests.spec.js",
   "PreviewInSolutionExplorer": false
 }

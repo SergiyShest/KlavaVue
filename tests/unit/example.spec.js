@@ -11,14 +11,17 @@ describe("input.vue", () => {
     expect(wrapper.text()).toMatch(inp);
   });
 });
-// describe("input1.vue", () => {
-//   it("data objects set correct", () => {
-//     const inp = "new message";
-//     const ex = "new Error";
-//     const wrapper = shallowMount(inpVue, {
-//       propsData: { Example: ex, Inputed: inp }
-//     });
-
+describe("input1.vue", () => {
+  it("renders props.msg when passed", () => {
+    const inp = "new message";
+    const ex = "new messagesdddd";
+    const wrapper = shallowMount(inpVue, {
+      propsData: { Example: ex, Inputed: inp }
+    });
+    console.log('---'+wrapper.text());
+    expect(wrapper.text()).toMatch(inp);
+  });
+});
 //     wrapper.vm.$nextTick(() => {
 //       expect(wrapper.vm.erText).toBe("Error");
 //       expect(wrapper.vm.textOk).toBe("new ");

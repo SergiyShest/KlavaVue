@@ -74,10 +74,8 @@
 
                     var currSpeed = this.$store.getters.GET_SPEED;
                     this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
-
-
                     this.fixResult(currSpeed);
-                    console.log(this.placeholder);
+                   // console.log(this.placeholder);
                 }
             }
             ,
@@ -112,6 +110,8 @@
         computed: {
             Example: function () {
                 if (!this.running) { return '' }
+                var s=this.AllExample[this.nextSentationIndex];
+                console.log(s);
                 return this.AllExample[this.nextSentationIndex];
             }
         },
