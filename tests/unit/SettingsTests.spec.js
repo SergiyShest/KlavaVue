@@ -1,15 +1,31 @@
+import { shallowMount ,createLocalVue} from "@vue/test-utils";
+import setting from "@/components/setting.vue";
+import {store} from '@/store/store';
 
-import { shallowMount } from "@vue/test-utils";
-//import inpVue from "@/components/klavaInp.vue";
-import speedometer from "@/components/speedometer.vue";
+const localVue = createLocalVue()
 
+localVue.use(store)
 
-
-describe("input.vue", () => {
-  it("renders props.msg when passed", () => {
-    const inp = "new message";
-    const ex = "new message";
-    const wrapper = shallowMount(speedometer);
-    //expect(wrapper.text()).toMatch(inp);
+describe("test ", () => {
+  it("User is choiced", () => {
+    const usersArrey= ["vac","den","pet"];//
+    var user='pet';
+    localStorage.setItem ('currentUser',user);
+    localStorage.setItem ('users',usersArrey);
+    const wrapper =shallowMount(setting, { store, localVue })
+    var text= wrapper.vm.currentUser;
+    console.log("------------------->"+text);
+    expect(text).toMatch(user);
   });
+  it("User selected lang is choiced", () => {
+    const usersArrey= ["vac","den","pet"];//
+    var user='pet';
+    localStorage.setItem ('currentUser',user);
+    localStorage.setItem ('users',usersArrey);
+    const wrapper =shallowMount(setting, { store, localVue })
+    var text= wrapper.vm.currentUser;
+    console.log("------------------->"+text);
+    expect(text).toMatch(user);
+  });
+  
 });

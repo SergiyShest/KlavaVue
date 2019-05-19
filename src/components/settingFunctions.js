@@ -1,6 +1,6 @@
 //Load User Achivment from localStorage
-export function LoadUserAchivment(userName) {
-   var userAchivmentStr = localStorage.getItem(userName);//read as string
+export function LoadUserAchivment(userName,setingString) {
+   var userAchivmentStr = localStorage.getItem(userName+"_"+setingString);//read as string
    if (userAchivmentStr != null) {
       try {
          return JSON.parse(userAchivmentStr);//
@@ -15,10 +15,10 @@ export function LoadUserAchivment(userName) {
 
 
 //Save User Achivment to localStorage
-export function SaveUserAchivment(userName, userAchivment) {
+export function SaveUserAchivment(userName, userAchivment,setingString) {
    const userAchivmentStr = JSON.stringify(userAchivment)
-   console.log(userAchivmentStr);
-   localStorage.setItem(userName, userAchivmentStr);
+   
+   localStorage.setItem(userName+"_"+setingString, userAchivmentStr);
 }
 
 export function LoadCurrUser(userArrey) {

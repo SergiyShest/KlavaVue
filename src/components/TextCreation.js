@@ -45,13 +45,10 @@ export function TRANSLATE(txt, dir = "ru-en") {
     var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=" + key + "&text=" + text + "&lang=" + dir + "&format=plain&options=1"
     request.open('GET', url, false);
     request.send();
-   // console.log(request.response);
     if (request.status >= 200 && request.status < 400) {
-      //  console.log(request);
         var data = JSON.parse(request.responseText);
         var  res= data.text[0];
-       // console.log(res);
-        return res;
+          return res;
     }
 };
 

@@ -19,7 +19,8 @@
     
     import {
         LoadUserAchivment,
-        SaveUserAchivment
+        SaveUserAchivment,
+        LoadCurrUser
     } from "./settingFunctions.js";
     export default {
         name: "setting",
@@ -37,10 +38,12 @@
         computed: {
             currentUserResults: {
                 get: function () {
-                    return this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
+                  return this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
+               
                 },
                 set: function (newVal) {
-                    this.$store.dispatch("SAVE_USER_ACHIEVEMENT_CHART", newVal); //Save result in Vuex
+
+                  this.$store.dispatch("SAVE_USER_ACHIEVEMENT_CHART", newVal); //Save result in Vuex
                 }
             }
         },
@@ -57,33 +60,47 @@
             },
             currentUserResults: function () {
                 SaveUserAchivment(this.currentUser, this.currentUserResults);
-            }
+            },
+            users: function (val) {
+                console.log('log-->'+val);
+            },
         },
         methods: {
             //load All Users and 
             LoadAllUsersNames: function () {
                 var usersStr = localStorage.getItem("users");
+                
                 if (usersStr == null) usersStr = "";
                 usersStr = usersStr.replace("s+", " ").replace(";+", ";");//remove white space
              if (usersStr.length > 0) {
-                    this.users.length = 0;
-                    this.users = usersStr.split(";");
+                 this.users.length = 0;
+                 console.log(usersStr);
+                 this.users = usersStr.split(";");
+                 console.log(this.users.length);
+                 console.log(this.users);
                 } else {
                     this.users = new Array(); //Create empty Array
                 }
             },
-            LoadCurrUser: function () {
-                this.currentUser = LoadCurrUser(this.users);
-            },
+            //LoadCurrUser: function () {
+            //    this.currentUser = LoadCurrUser(this.users);
+            //    console.log(this.users);
+            //},
             LoadCurrUserResult: function () {
                 this.currentUserResults = LoadUserAchivment(this.currentUser);
+            },
+            reloadUsers(){
+                this.LoadAllUsersNames();
+               
+                this.currentUser = LoadCurrUser(this.users);
+              
+                this.currentUserResults= LoadUserAchivment(this.currentUser);
             }
         },
         beforeMount() {
             //инициализация при загрузке
-            this.LoadAllUsersNames();
-
-            this.LoadCurrUserResult();
+            this.reloadUsers();
+            console.log("-->"+this.users);
         }
     };
 </script>

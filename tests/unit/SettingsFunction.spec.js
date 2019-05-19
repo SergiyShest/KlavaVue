@@ -17,24 +17,25 @@ import { LoadUserAchivment,SaveUserAchivment,LoadCurrUser } from "@/components/s
 describe(" UserAchivment Function Tests", () => {
   it("Save and load simple", () => {
     
-    const userAchivment= [{date:'data',Errors:5,speed:100}]//
+    const userAchivment= [{date:'data',Errors:5,speed:100}]//simple userAchivment 
     
-    SaveUserAchivment('userName',userAchivment);//save
-    const inp = JSON.stringify(LoadUserAchivment('userName'));//laod and serialize
+    SaveUserAchivment('userName',userAchivment,'1');//save 
+    const inp = JSON.stringify(LoadUserAchivment('userName','1'));//load and serialize
     const ex = JSON.stringify(userAchivment);//serialaze etalon
-    expect(ex).toMatch(inp);//compare
+
+    expect(inp).toMatch(ex);//compare
 
   });
   it("load empty", () => {
     
-     localStorage.removeItem ('userName'); 
-    const inp = JSON.stringify(LoadUserAchivment('userName'));
+     localStorage.removeItem ('userName_1'); 
+    const inp = JSON.stringify(LoadUserAchivment('userName','1'));
     const ex = '[]'
     expect(ex).toMatch(inp);
   });
   it("load error string", () => {
-    localStorage.setItem('userName','notValid');//save not Valid items
-    const inp = JSON.stringify(LoadUserAchivment('userName'));
+    localStorage.setItem('userName_1','notValid');//save not Valid items
+    const inp = JSON.stringify(LoadUserAchivment('userName','1'));
     const ex = '[]'
     expect(ex).toMatch(inp);
   }); 
