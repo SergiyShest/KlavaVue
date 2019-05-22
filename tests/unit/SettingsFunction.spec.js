@@ -12,19 +12,16 @@
 //     });
 // });
 
-import { LoadUserAchivment,SaveUserAchivment,LoadCurrUser } from "@/components/settingFunctions.js";
+import { LoadUserAchivment,SaveUserAchivment,LoadCurrUser,LoadUserSettings,SaveUserSettings } from "@/components/settingFunctions.js";
 
 describe(" UserAchivment Function Tests", () => {
   it("Save and load simple", () => {
     
     const userAchivment= [{date:'data',Errors:5,speed:100}]//simple userAchivment 
-    
-    SaveUserAchivment('userName',userAchivment,'1');//save 
-    const inp = JSON.stringify(LoadUserAchivment('userName','1'));//load and serialize
-    const ex = JSON.stringify(userAchivment);//serialaze etalon
-
-    expect(inp).toMatch(ex);//compare
-
+   SaveUserAchivment('userName',userAchivment,'1');//save 
+    const LoadeduserAchivment=LoadUserAchivment('userName','1')//load  userAchivment 
+      expect(userAchivment).toEqual(LoadeduserAchivment);
+ 
   });
   it("load empty", () => {
     
@@ -83,4 +80,20 @@ describe("LoadCurrUser Tests", () => {
      expect(users.length).toBe(1);//compare
      expect(user).toEqual(users[0]);//compare
    });  
+});
+
+describe("Load Save User Settings Tests", () => {
+
+
+  it("Load Save setting  ", () => {
+   var user='den';
+    const userSettings= {selectedLang: "SSS", Mode: "KvaziText",IgnoreCapital: false,IgnoreRepeetWhiteSpace: false};//
+    SaveUserSettings(user,userSettings);//save
+  
+    const loadedSettings=  LoadUserSettings(user);//save
+
+    expect(userSettings).toEqual(loadedSettings);//compare
+  });
+
+  
 });

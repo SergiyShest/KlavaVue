@@ -217,7 +217,7 @@ function KvasiText(count, lang,short) {
 }
 
 export function GetKvasiText(count, lang,short) {
-    return KvasiText(count, lang,short);
+    return KvasiText(count, lang,true);
 }
 
 
