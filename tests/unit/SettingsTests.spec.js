@@ -44,9 +44,9 @@ it("User selected lang is choiced", () => {
     wrapper.vm.currentUserResults=userAchivment;//user Achivment mast bi saved
     //console.log("------------------->"+JSON.stringify(wrapper.vm.currentUserResults));
     wrapper.vm.currentUserSettings.selectedLang= "английский";//this time currentUserResults mast be reloaded
-    //console.log("------------------->"+JSON.stringify(wrapper.vm.currentUserResults));
+    wrapper.vm.$nextTick(() => {
     expect(userAchivment).not.toEqual(wrapper.vm.currentUserResults);
-   // expect(text).toMatch(user);
+    });
   });
 
 

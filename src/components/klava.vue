@@ -16,7 +16,9 @@
         <br />
         <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
         <div class="row">
-            <setting class="column" v-on:langChanged="changeLang($event)" style="width:auto" />
+            <setting class="column" v-on:settingsChanged="settingsChanged($event)" 
+            
+             style="width:auto" />
             <chart class="column" style="min-width:80%" />
         </div>
     </div>
@@ -61,8 +63,13 @@
             changeLang: function (e) {
                 this.lang = e;
                 this.AllExample = GetKvasiText(this.sentationCount, this.lang);
-            }
-            ,
+            },
+             settingsChanged: function (e) {
+                this.lang = e.selectedLang;
+                this.sentationCount=e.SentationsCount;
+                
+                this.AllExample = GetKvasiText(this.sentationCount, this.lang);
+            }           ,
             nextSentation: function () {//
                 this.inputedString = '';
 

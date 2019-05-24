@@ -12,14 +12,39 @@
           </select>
         </td>
       </tr>
+      <tr>
+        <td>
+          <h3>Language:</h3>
+        </td>
+        <td>
+          <select v-model="currentUserSettings.selectedLang">
+            <option selected>русский</option>
+            <option>english</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h3>Centanion count:</h3>
+        </td>
+        <td >
+          <input type="number" v-model="currentUserSettings.SentationsCount" style="width:50px" >
+        </td>
+
+      </tr>
+      <tr>
+        <td>
+          <h3>Ignore Capital:</h3>
+        </td>
+        <td >
+          <input type="checkbox" 
+          v-model="currentUserSettings.IgnoreCapital"
+             >
+        </td>
+      </tr>
     </Table>
 
     <new-setting v-on:usercreated="reloadUsers()"></new-setting>
-    <h3>language:</h3>
-    <select v-model="currentUserSettings.selectedLang">
-      <option selected>русский</option>
-      <option>english</option>
-    </select>
   </div>
 </template>
 
@@ -47,7 +72,8 @@ export default {
         selectedLang: "русский",
         Mode: "KvaziText",
         IgnoreCapital: false,
-        IgnoreRepeetWhiteSpace: false
+        IgnoreRepeetWhiteSpace: false,
+        SentationsCount: 1
       }
     };
   },
@@ -66,16 +92,13 @@ export default {
     currentUserSettings: {
       handler: function(newVal, oldVal) {
         var val = "en";
-        //if (newVal.selectedLang != oldVal.selectedLang) {
-           var val = "en";
-          if (newVal.selectedLang === "русский")
-          {val = "ru";}
-          this.$emit("langChanged", val);//send event
-
-          this.LoadCurrUserResult();//load result for this langr
-        //}this.LoadCurrUserResult();//load result for this langr
-       // console.log('newVal===================================================');
-       // console.log(newVal.selectedLang);
+        var val = "en";
+        if (newVal.selectedLang === "русский") {
+          val = "ru";
+        }
+        this.$emit("langChanged", val); //send event
+        this.$emit("settingsChanged", newVal);
+        this.LoadCurrUserResult(); //load result for this langr
       },
       deep: true
     },
@@ -85,8 +108,8 @@ export default {
       this.LoadCurrUserResult(); //user changed so we need Load result
     },
     currentUserResults: function() {
-       const serSerring = SerialazeUserSettings(this.currentUserSettings);
-      SaveUserAchivment(this.currentUser, this.currentUserResults,serSerring);
+      const serSerring = SerialazeUserSettings(this.currentUserSettings);
+      SaveUserAchivment(this.currentUser, this.currentUserResults, serSerring);
     }
   },
   methods: {
@@ -98,18 +121,14 @@ export default {
       usersStr = usersStr.replace("s+", " ").replace(";+", ";"); //remove white space
       if (usersStr.length > 0) {
         this.users.length = 0;
-        //console.log(usersStr);
         this.users = usersStr.split(";");
-       // console.log(this.users.length);
-       // console.log(this.users);
-      } else {
+        } else {
         this.users = new Array(); //Create empty Array
       }
     },
     LoadCurrUserResult: function() {
-     // this.currentUserSettings = LoadUserSettings(this.currentUser);
       const serSerring = SerialazeUserSettings(this.currentUserSettings);
-      console.log('serSerring='+serSerring);
+      console.log("serSerring=" + serSerring);
       this.currentUserResults = LoadUserAchivment(this.currentUser, serSerring);
     },
     reloadUsers() {
