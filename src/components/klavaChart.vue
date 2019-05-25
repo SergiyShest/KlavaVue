@@ -40,7 +40,7 @@
                 result.forEach(x => {
                     var arrR = x.split('/');
                     var res = parseInt(arrR[0]);
-                    var err = parseInt(arrR[1]) * 10;
+                    var err = parseInt(arrR[1]) ;
 
                     data.datasets[0].data.push(res);
                     data.datasets[1].data.push(err);
