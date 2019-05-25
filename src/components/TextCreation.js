@@ -220,4 +220,22 @@ export function GetKvasiText(count, lang,short) {
     return KvasiText(count, lang,true);
 }
 
+export function GetKvasiTextS(set,short) {
+
+    var arr = new Array();
+    for (var i = 0; i < set.SentationsCount; i++) {
+        arr[i] = GetSentation(short);
+    }
+    if (set.Lang === 'en') {
+        for (var i = 0; i < set.SentationsCount; i++) {
+            arr[i] = TRANSLATE(arr[i]);
+        }
+    }
+     if (set.IgnoreCapital) {
+        for (var i = 0; i < set.SentationsCount; i++) {
+            arr[i] = arr[i].toLowerCase();
+        }
+    }   
+    return arr;
+}
 

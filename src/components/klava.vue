@@ -25,7 +25,7 @@
 </template>
 <script>
 
-    import { GetKvasiText } from "./TextCreation.js";
+    import { GetKvasiText,GetKvasiTextS } from "./TextCreation.js";
     import speedometer from "./speedometer.vue";
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
@@ -54,28 +54,22 @@
                 charDown: null,
                 charUp: null,
                 nextChar: null,
-                sentationCount: 1,
-                lang: 'ru',
+                setting:null,
                 avaiableLang: ['ru', 'en']
             };
         },
         methods: {
-            changeLang: function (e) {
-                this.lang = e;
-                this.AllExample = GetKvasiText(this.sentationCount, this.lang);
-            },
-             settingsChanged: function (e) {
-                this.lang = e.selectedLang;
-                this.sentationCount=e.SentationsCount;
-                
-                this.AllExample = GetKvasiText(this.sentationCount, this.lang);
+          
+            settingsChanged: function (e) {
+                this.setting = e;
+                this.AllExample = GetKvasiTextS(this.setting);
             }           ,
             nextSentation: function () {//
                 this.inputedString = '';
 
                 if (this.nextSentationIndex < this.AllExample.length - 1) {
                     this.nextSentationIndex++;
-                    this.placeholder = 'nextIndex=' + this.nextSentationIndex + ' ' + this.AllExample.length + '';
+                   // this.placeholder = 'nextIndex=' + this.nextSentationIndex + ' ' + this.AllExample.length + '';
                 }
                 else {
 
@@ -95,7 +89,7 @@
                 this.inputedString = '';
                 this.errorCount = 0;
                 this.nextSentationIndex = 0;
-                this.AllExample = GetKvasiText(this.sentationCount, this.lang);
+                this.AllExample = GetKvasiTextS(this.setting);
                 this.nextChar = this.AllExample[0][0].toLowerCase(); 
 
             }
@@ -125,9 +119,9 @@
         beforeMount() {
            
             //инициализация первый раз
-            this.AllExample = GetKvasiText(this.sentationCount, this.lang);
+         //   this.AllExample = GetKvasiTextS(setting);
             //highLight first char in
-            this.nextChar = this.AllExample[0][0].toLowerCase();
+          //  this.nextChar = this.AllExample[0][0].toLowerCase();
            // this.setNextChar(firstChar);
         },
         afterMount() {

@@ -12,7 +12,8 @@
 //     });
 // });
 
-import { LoadUserAchivment,SaveUserAchivment,LoadCurrUser,LoadUserSettings,SaveUserSettings } from "@/components/settingFunctions.js";
+import { LoadUserAchivment,SaveUserAchivment,LoadCurrUser,LoadUserSettings,SaveUserSettings,Set } from "@/components/settingFunctions.js";
+import { settings } from "cluster";
 
 describe(" UserAchivment Function Tests", () => {
   it("Save and load simple", () => {
@@ -85,9 +86,12 @@ describe("LoadCurrUser Tests", () => {
 describe("Load Save User Settings Tests", () => {
 
 
-  it("Load Save setting  ", () => {
+  it("LoadF Save setting  ", () => {
    var user='den';
-    const userSettings= {selectedLang: "SSS", Mode: "KvaziText",IgnoreCapital: false,IgnoreRepeetWhiteSpace: false};//
+    var userSettings= new Set();
+    var SS=userSettings.sE
+    userSettings.selectedLang='French'
+    //
     SaveUserSettings(user,userSettings);//save
   
     const loadedSettings=  LoadUserSettings(user);//save

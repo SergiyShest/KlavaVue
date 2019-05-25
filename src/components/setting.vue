@@ -7,7 +7,6 @@
         </td>
         <td>
           <select v-model="currentUser">
-            <option selected>{{currentUser}}</option>
             <option v-for="user in users" v-bind:key="user">{{user}}</option>
           </select>
         </td>
@@ -51,7 +50,8 @@
 <script>
 import newSetting from "./newSetting.vue";
 
-import {
+    import {
+  Set,
   LoadUserAchivment,
   SaveUserAchivment,
   LoadCurrUser,
@@ -66,15 +66,17 @@ export default {
   props: {},
   data() {
     return {
-      currentUser: "",
-      users: [],
-      currentUserSettings: {
-        selectedLang: "русский",
-        Mode: "KvaziText",
-        IgnoreCapital: false,
-        IgnoreRepeetWhiteSpace: false,
-        SentationsCount: 1
-      }
+        currentUser: "",
+        users: [],
+       currentUserSettings:new Set()
+      //currentUserSettings: {
+      //  selectedLang: "русский",
+      //  Mode: "KvaziText",
+      //  IgnoreCapital: false,
+      //  IgnoreRepeetWhiteSpace: false,
+      //  SentationsCount: 1
+      //  }
+
     };
   },
   computed: {
@@ -91,12 +93,7 @@ export default {
   watch: {
     currentUserSettings: {
       handler: function(newVal, oldVal) {
-        var val = "en";
-        var val = "en";
-        if (newVal.selectedLang === "русский") {
-          val = "ru";
-        }
-        this.$emit("langChanged", val); //send event
+        
         this.$emit("settingsChanged", newVal);
         this.LoadCurrUserResult(); //load result for this langr
       },

@@ -4,7 +4,7 @@ export class Set {
         this.Mode = "KvaziText";
         this.IgnoreCapital = false;
         this.IgnoreRepeetWhiteSpace = false;
-        this.SentationsCount = 1;
+        this.SentationsCount = 2;
     }
     Serialaze() {
         var userSettingStr =
@@ -16,7 +16,12 @@ export class Set {
         return userSettingStr;
 
     }
-
+    get  Lang() {
+        if (this.selectedLang === "русский")
+            return 'ru';
+        else
+            return 'en';
+    }
 }
 
 //Load User Achivment from localStorage
@@ -70,24 +75,21 @@ export function LoadUserSettings(userName) {
     if (userSettingStr != null) {
         try {
             var arr = userSettingStr.split(";");
-            return {
-                selectedLang: arr[0],
-                Mode: arr[1],
-                IgnoreCapital: arr[2] === 'true',
-                IgnoreRepeetWhiteSpace: arr[3] === 'true',
-                SentationsCount: arr[4]
-            };
+            var set = new Set();
+
+            set.selectedLang = arr[0];
+            set.Mode = arr[1];
+            set.IgnoreCapital = arr[2] === 'true';
+            set.IgnoreRepeetWhiteSpace = arr[3] === 'true';
+            set.SentationsCount = arr[4];
+
+            return set;
         } catch (ex) {
             console.error(ex);
         }
     }
-    return {
-        selectedLang: "русский",
-        Mode: "KvaziText",
-        IgnoreCapital: false,
-        IgnoreRepeetWhiteSpace: false,
-        SentationsCount: 1
-    };
+    return new Set();
+
 }
 
 export function SerialazeUserSettings(userSetting) {
@@ -102,15 +104,14 @@ export function SerialazeUserSettings(userSetting) {
     } catch (ex) {
         console.error(ex);
     }
+
+   
 }
 export function SaveUserSettings(userName, userSetting) {
-
-
-
     try {
-        var userSettingStr = SerialazeUserSettings(userSetting);
+        var userSettingStr = userSetting.Serialaze();
         console.log("userSettingStr=" + userSettingStr);
-        localStorage.setItem(userName + "_setting", userSettingStr)
+        localStorage.setItem(userName + "_setting", userSettingStr);
     } catch (ex) {
         console.error("Err" + ex);
     }
