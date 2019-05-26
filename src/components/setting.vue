@@ -125,7 +125,7 @@ export default {
     },
     LoadCurrUserResult: function() {
       const serSerring = SerialazeUserSettings(this.currentUserSettings);
-      console.log("serSerring=" + serSerring);
+//     console.log("serSerring=" + serSerring);
       this.currentUserResults = LoadUserAchivment(this.currentUser, serSerring);
     },
     reloadUsers() {

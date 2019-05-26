@@ -4,7 +4,7 @@ export class Set {
         this.Mode = "KvaziText";
         this.IgnoreCapital = false;
         this.IgnoreRepeetWhiteSpace = false;
-        this.SentationsCount = 2;
+        this.SentationsCount = 1;
     }
     Serialaze() {
         var userSettingStr =
@@ -32,7 +32,7 @@ export function LoadUserAchivment(userName, setingString) {
             console.log("load " + userName + "_" + setingString)
             return JSON.parse(userAchivmentStr);//
 
-        } catch{
+        } catch(e){
             return [];
         }
     }
