@@ -91,6 +91,7 @@ describe("Load Save User Settings Tests", () => {
     var userSettings= new Set();
     var SS=userSettings.sE
     userSettings.selectedLang='French'
+    userSettings.SentationsCount = '3';
     //
     SaveUserSettings(user,userSettings);//save
   

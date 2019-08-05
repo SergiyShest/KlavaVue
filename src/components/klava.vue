@@ -1,6 +1,7 @@
 ﻿<template>
     <div class="info">
         <speedometer :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
+        <input readonly value="{{InitExample[0]}}"    />
         <klava-inp :Example="Example" :Inputed="inputedString" align="left"
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
@@ -25,7 +26,7 @@
 </template>
 <script>
 
-    import { GetKvasiText,GetKvasiTextS } from "./TextCreation.js";
+    import { GetKvasiTextS } from "./TextCreation.js";
     import speedometer from "./speedometer.vue";
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
@@ -43,8 +44,7 @@
         },
         data() {
             return {
-                AllExample: [],
-                speed: 0,
+                 speed: 0,
                 placeholder: 'input string above',
                 inputedCharCount: 0,
                 inputedString: '',
@@ -55,21 +55,24 @@
                 charUp: null,
                 nextChar: null,
                 setting:null,
-                avaiableLang: ['ru', 'en']
+                avaiableLang: ['ru', 'en'],
+                InitExample: [],//для английского языка первоначальный русский вариант
+                AllExample: [],
             };
         },
         methods: {
-          
+           
             settingsChanged: function (e) {
                 this.setting = e;
-                this.AllExample = GetKvasiTextS(this.setting);
+                this.InitExample = new Array();
+                this.AllExample = GetKvasiTextS(this.setting,false,this.InitExample);
             }           ,
             nextSentation: function () {//
                 this.inputedString = '';
 
                 if (this.nextSentationIndex < this.AllExample.length - 1) {
                     this.nextSentationIndex++;
-                   // this.placeholder = 'nextIndex=' + this.nextSentationIndex + ' ' + this.AllExample.length + '';
+                  // педложение кочилось
                 }
                 else {
 
@@ -89,7 +92,8 @@
                 this.inputedString = '';
                 this.errorCount = 0;
                 this.nextSentationIndex = 0;
-                this.AllExample = GetKvasiTextS(this.setting);
+                this.InitExample = new Array();
+                this.AllExample = GetKvasiTextS(this.setting,false,this.InitExample);
                 this.nextChar = this.AllExample[0][0].toLowerCase(); 
 
             }

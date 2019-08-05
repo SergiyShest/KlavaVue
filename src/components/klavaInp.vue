@@ -23,7 +23,7 @@
         },
         methods: {
             compare() {
-                console.log(this.Inputed);
+               // console.log(this.Inputed);
                 this.okText = ''; this.erText = ''; this.notInptText = '';
                 if(this.Example==null)return;
                 for (var i = 0; i < this.Example.length; i++) {
