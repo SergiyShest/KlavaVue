@@ -3,12 +3,10 @@ const Dicti = {
 
     Nouns: ["Змей Горыныч", "принц", "Иван дурак", "Крокодил Гена", "Колобок", "Губка Боб квадратные штаны", "чудик", "Владимир", "чувак", "Петрович", "черт", "кот", "кащей", "Серый волк",
         'пират', "маляр штукатур", "архиепископ", "водитель", "инспектор", "разнорабочий", "министр", "охранник", "программист", "президент", "алкоголик", "полицейский", "пожарный", "маньяк", "пьяница", "наркоман", "стилист", "парикмахер", "могильщик", "депутат"],
-    // Профессии
-    //   Proff: ['пират', "маляр штукатур", "архиепископ", "водитель", "инспектор", "разнорабочий", "министр", "охранник", "программист", "президент", "алкоголик", "полицейский", "пожарный", "маньяк", "пьяница", "наркоман", "стилист", "парикмахер", "могильщик", "депутат"],
     Adjectives: ["пьяный", "феерический", "эпичный", "бородатый", "глупый", "добрый", "красный", "мокрый", "пластилиновый", "умный", "сумашедший", "ленивый", 'лукавый', 'грязный', 'одноногий', 'кривой', 'косой', 'прыщавый', 'смелый', 'лысый', 'тупой', 'накачанный'],
-    AddVerbs: ["зло", "развратно", "неумело", "весело", "смешно", "красиво", "честно", "глупо", "криво", "пакостно", "злорадно", "подло", "задумчиво", "лихо", "тихо", "зловеще", 'лукаво'],
-    Verb: ["пищал", "подпрыгивал", "скакал", "лаял", "мылся", "прыгал", "пукал", "восхищался", "раздевался", "читал", "икал", "спал", "чесался", "ругался", "бесился", "играл", "срал"],
-    Verbs: ["толкали", "пищали", "подпрыгивали", "скакали", "лаяли", "мылись", "прыгали", "пукали", "восхищались", "насмехались", "ругались", "бесились", "игрались", "срали", "страхались", "волновались", "прятались"],
+    AddVerbs: ["ласково", "зло", "развратно", "неумело", "весело", "смешно", "красиво", "честно", "глупо", "криво", "грубо", "пакостно", "злорадно", "подло", "задумчиво", "лихо", "тихо", "зловеще", 'лукаво', 'мягко'],
+    Verb: ["пищал", "подпрыгивал", "скакал", "лаял", "мылся", "прыгал", "пукал", "восхищался", "раздевался", "читал", "икал", "спал", "чесался", "ругался", "бесился", "играл", "срал", "срал"],
+    Verbs: ["толкали", "пищали", "подпрыгивали", "скакали", "лаяли", "мылись", "прыгали", "пукали", "восхищались", "насмехались", "ругались", "бесились", "игрались", "волновались", "прятались", "плясали", "играли в войнушку"],
 
     NounsW: ["милашка", "Вероника", "Наташа", "Маша", "Вика", "Симка", "Пандочка", "Совунья", "Нюша", "девушка", "крыса", "коза", "лиса", "старуха", "фея", "лягушка", "ссука", "свинья", "ворона"],
     AdjectivesW: ["грязная", "потная", "хитрая", "жадная", "пухлая", "писклявая", "клевая", "желтая", "мокрая", "злая", "уродливая", "глупая", "красивая", "крохотная", "блестящая", "милая", "тухлая", "вонючая", "голая"],
@@ -31,10 +29,7 @@ const Dicti = {
 
 }
 
-
-
-
-
+/*  */
 export function WordEx(dictName) {
     var counerNam = dictName + "_counter";
     var word = '';
@@ -107,17 +102,11 @@ function GetSentation3() {
 
     var s =
         WordEx('AdjectivesW') + ', ' + WordEx('AdjectivesW') + ' и ' + WordEx('AdjectivesW') + ' ' +
-        WordEx('Nouns') + ' ' +
+        WordEx('NounsW') + ' ' +
         WordEx('AddVerbs') + ' ' +
         WordEx('VerbsW');
     return s + AddPlace() + '.';
 }
-
-
-
-
-
-
 
 export function GetSentation4() {
 
@@ -142,7 +131,6 @@ export function GetSentation5() {
     return s + AddPlace() + '.';
 }
 
-
 export function GetSentation6() {
 
 
@@ -156,17 +144,11 @@ export function GetSentation6() {
 }
 
 
-
-
-
 export function GetSentation7() {
 
     var s = WordEx('Adjectives') + ' ' + WordEx('Nouns') + ' и ' + WordEx('Adjectives') + ' ' + WordEx('Nouns') + '  ' + WordEx('AddVerbs') + ' ' + WordEx('Verbs') + ' и ' + WordEx('AddVerbs') + ' ' + WordEx('Verbs') + ' ';
     return s + AddPlace() + '.';
 }
-
-
-
 
 //place and preposition (in or on)
 
@@ -200,6 +182,37 @@ function GetSentation(short = false) {
     return sentence;
 }
 
+const LearnSet = {
+    set0: ["а", 'о', 'п', 'р'],
+    set1: ["ы", 'в', "а", 'п', "р", 'о', "о", 'л', "д"],
+    set2: ["ы", 'в', "а", 'п', "р", 'о', "о", 'л', "д",
+          "ц", 'у', "к", 'е', "н", 'г', "ш", 'щ', "з",]
+}
+
+//получение набора букв для обучения
+export function GetLern(type, short = false) {
+    let set = LearnSet.set0;
+    console.log(type);
+    if (type === "learn2") {
+        set = LearnSet.set1;
+    }
+    if (type === "learn3") {
+        set = LearnSet.set2;
+    }
+    var res = new Array();
+    for (var i = 0; i < 32; i++) {
+        var j = Math.floor(Math.random() * (set.length));
+        if (i>0 && !(res.length % 5)) {
+            res.push(' ');//insert white space every 3 simvols
+        }
+        res.push(set[j]);
+      }
+    return res;
+}
+
+
+
+
 //получение текста из count предложений на lang языке
 function KvasiText(count, lang, short) {
     var arr = new Array();
@@ -210,7 +223,6 @@ function KvasiText(count, lang, short) {
         for (var i = 0; i < count; i++) {
             arr[i] = TRANSLATE(arr[i]);
         }
-
     }
     return arr;
 }
@@ -222,8 +234,17 @@ export function GetKvasiText(count, lang, short) {
 export function GetKvasiTextS(set, short, isxArr = null) {
     var arr = new Array();
     for (var i = 0; i < set.SentationsCount; i++) {
-        arr[i] = GetSentation(short);
+        switch (set.Mode) {
+            case "KvaziText": {
+                arr[i] = GetSentation(short);
+            } break;
+            default: {
+                arr[i] = GetLern(set.Mode, short);
+            } break;
+
+        }
     }
+
     if (set.Lang === 'en') {
         if (isxArr != null) {
             for (var i = 0; i < set.SentationsCount; i++) {
@@ -239,6 +260,7 @@ export function GetKvasiTextS(set, short, isxArr = null) {
             arr[i] = arr[i].toLowerCase();
         }
     }
+
     return arr;
 }
 

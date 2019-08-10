@@ -13,6 +13,17 @@
       </tr>
       <tr>
         <td>
+          <h3>Mode:</h3>
+        </td>
+        <td>
+          <select v-model="currentUserSettings.Mode">
+            <option v-for="mode in avaiableModes" :key="mode" >{{mode}}</option>
+           
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>
           <h3>Language:</h3>
         </td>
         <td>
@@ -26,19 +37,16 @@
         <td>
           <h3>Centanion count:</h3>
         </td>
-        <td >
-          <input type="number" v-model="currentUserSettings.SentationsCount" style="width:50px" >
+        <td>
+          <input type="number" v-model="currentUserSettings.SentationsCount" style="width:50px" />
         </td>
-
       </tr>
       <tr>
         <td>
           <h3>Ignore Capital:</h3>
         </td>
-        <td >
-          <input type="checkbox" 
-          v-model="currentUserSettings.IgnoreCapital"
-             >
+        <td>
+          <input type="checkbox" v-model="currentUserSettings.IgnoreCapital" />
         </td>
       </tr>
     </Table>
@@ -50,7 +58,7 @@
 <script>
 import newSetting from "./newSetting.vue";
 
-    import {
+import {
   Set,
   LoadUserAchivment,
   SaveUserAchivment,
@@ -66,17 +74,10 @@ export default {
   props: {},
   data() {
     return {
-        currentUser: "",
-        users: [],
-       currentUserSettings:new Set()
-      //currentUserSettings: {
-      //  selectedLang: "русский",
-      //  Mode: "KvaziText",
-      //  IgnoreCapital: false,
-      //  IgnoreRepeetWhiteSpace: false,
-      //  SentationsCount: 1
-      //  }
-
+      currentUser: "",
+      users: [],
+      currentUserSettings: new Set(),
+      avaiableModes: Set.AvaiableModes()
     };
   },
   computed: {
@@ -93,7 +94,6 @@ export default {
   watch: {
     currentUserSettings: {
       handler: function(newVal, oldVal) {
-        
         this.$emit("settingsChanged", newVal);
         this.LoadCurrUserResult(); //load result for this langr
       },
@@ -119,13 +119,13 @@ export default {
       if (usersStr.length > 0) {
         this.users.length = 0;
         this.users = usersStr.split(";");
-        } else {
+      } else {
         this.users = new Array(); //Create empty Array
       }
     },
     LoadCurrUserResult: function() {
       const serSerring = SerialazeUserSettings(this.currentUserSettings);
-//     console.log("serSerring=" + serSerring);
+      //     console.log("serSerring=" + serSerring);
       this.currentUserResults = LoadUserAchivment(this.currentUser, serSerring);
     },
     reloadUsers() {

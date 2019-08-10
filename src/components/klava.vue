@@ -1,7 +1,8 @@
 ﻿<template>
-    <div class="info">
+    <div class="main">
         <speedometer :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
-        <input readonly value="{{InitExample[0]}}"    />
+        <div>{{InitExample[nextSentationIndex]}}</div>
+ 
         <klava-inp :Example="Example" :Inputed="inputedString" align="left"
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
@@ -18,7 +19,6 @@
         <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
         <div class="row">
             <setting class="column" v-on:settingsChanged="settingsChanged($event)" 
-            
              style="width:auto" />
             <chart class="column" style="min-width:80%" />
         </div>
@@ -32,8 +32,7 @@
     import setting from "./setting.vue";
     import chart from "./klavaChart.vue";
     import buttons from "./buttons.vue";
-    import { get } from "http";
-    import { bus } from '../store/bus'
+
 
     export default {
         name: "Klava",
