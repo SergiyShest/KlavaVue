@@ -23,7 +23,7 @@ export class Set {
             return 'en';
     }
 static  AvaiableModes() {
-return ["KvaziText" ,"learn1","learn2","learn3"];
+return ["KvaziText" ,"learn1","learn2","learn3","word1","word2","word3"];
 }
 
 }
@@ -43,9 +43,6 @@ export function LoadUserAchivment(userName, setingString) {
 
     return [];
 }
-
-
-
 
 //Save User Achivment to localStorage
 export function SaveUserAchivment(userName, userAchivment, setingString) {
