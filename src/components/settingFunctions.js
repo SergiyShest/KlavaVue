@@ -23,7 +23,7 @@ export class Set {
             return 'en';
     }
 static  AvaiableModes() {
-return ["KvaziText" ,"learn1","learn2","learn3","word1","word2","word3"];
+return ["KvaziText" ,"learn1","learn2","learn3","learn4","learn5",    "word1","word2","word3"];
 }
 
 }
@@ -69,7 +69,6 @@ export function LoadCurrUser(userArrey) {
     return currentUser;
 }
 
-
 export function LoadUserSettings(userName) {
 
     var userSettingStr = localStorage.getItem(userName + "_setting");//read as string
@@ -77,13 +76,12 @@ export function LoadUserSettings(userName) {
         try {
             var arr = userSettingStr.split(";");
             var set = new Set();
-
             set.selectedLang = arr[0];
             set.Mode = arr[1];
+
             set.IgnoreCapital = arr[2] === 'true';
             set.IgnoreRepeetWhiteSpace = arr[3] === 'true';
             set.SentationsCount = arr[4];
-
             return set;
         } catch (ex) {
             console.error(ex);
@@ -108,6 +106,7 @@ export function SerialazeUserSettings(userSetting) {
 
    
 }
+
 export function SaveUserSettings(userName, userSetting) {
     try {
         var userSettingStr = userSetting.Serialaze();

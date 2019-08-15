@@ -81,6 +81,7 @@
                                 item.isPressed = pressed;
                             }
                             else {
+                                console.log(code);
                                 item = this.row5.find(function (v) { return v.code == code; });
                                 if (item != undefined) {
                                     item.isPressed = pressed;
@@ -96,6 +97,7 @@
 
 
             highlightButton: function (code, highligh) {
+
                 var item = this.row1.find(function (v) { return v.sh == code; });
                 if (item != undefined) {
                     item.highlight = highligh;
@@ -116,6 +118,10 @@
                                 item.highlight = highligh;
                             }
                             else {
+                                if (code == ' ')
+                                {
+                                    code = 'Пробел';
+                                }
                                 item = this.row5.find(function (v) { return v.sh == code; });
                                 if (item != undefined) {
                                     item.highlight = highligh;

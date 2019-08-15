@@ -1,8 +1,12 @@
 ﻿<template>
     <div class="main">
-        <speedometer :inputedCharCount="inputedCharCount" :errorCount="errorCount" />
-        <div>{{InitExample[nextSentationIndex]}}</div>
- 
+        <div>Количество ошибок {{errorCount }}</div>
+        <counter :inputedCharCount="inputedCharCount" v-on:result="fixResult($event)" />
+        <!--<speedometer :inputedC
+
+        harCount="inputedCharCount" :errorCount="errorCount" :runningp="running" />
+        <div>{{InitExample[nextSentationIndex]}}</div>-->
+
         <klava-inp :Example="Example" :Inputed="inputedString" align="left"
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
@@ -18,8 +22,8 @@
         <br />
         <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
         <div class="row">
-            <setting class="column" v-on:settingsChanged="settingsChanged($event)" 
-             style="width:auto" />
+            <setting class="column" v-on:settingsChanged="settingsChanged($event)"
+                     style="width:auto" />
             <chart class="column" style="min-width:80%" />
         </div>
     </div>
@@ -28,6 +32,7 @@
 
     import { GetKvasiTextS } from "./TextCreation.js";
     import speedometer from "./speedometer.vue";
+    import counter from "./counter.vue";
     import klavaInp from "./klavaInp.vue";
     import setting from "./setting.vue";
     import chart from "./klavaChart.vue";
@@ -37,7 +42,7 @@
     export default {
         name: "Klava",
         components: {
-            klavaInp, speedometer, setting, chart, buttons
+          counter,  klavaInp, speedometer, setting, chart, buttons
         },
         props: {
         },
@@ -71,37 +76,42 @@
 
                 if (this.nextSentationIndex < this.AllExample.length - 1) {
                     this.nextSentationIndex++;
-                  // педложение кочилось
+                 
                 }
-                else {
-
-                    var currSpeed = this.$store.getters.GET_SPEED;
-                    this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
-                    this.fixResult(currSpeed);
+                else { // педложение кочилось
+                    this.inputedCharCount = 0;
+                 //  var currSpeed = this.$store.getters.GET_SPEED;
+                //    this.placeholder = 'Your speed is ' + currSpeed + ' press enter for continue';
+                //    this.fixResult(currSpeed);
                    // console.log(this.placeholder);
                 }
             }
+
             ,
             nextText: function () {//create next text
+               this.running = false;
                 this.$root.$store.dispatch('SAVE_SPEED', 0);//send command in component Speedometr for reset
-                this.running = true;
+               
                 this.speed = 0;
                 this.placeholder = 'input string above';
-                this.inputedCharCount = 0;
+                
                 this.inputedString = '';
                 this.errorCount = 0;
                 this.nextSentationIndex = 0;
                 this.InitExample = new Array();
                 this.AllExample = GetKvasiTextS(this.setting,false,this.InitExample);
                 this.nextChar = this.AllExample[0][0].toLowerCase(); 
-
+                this.running = true;
             }
             ,
-            fixResult: function (result) {
+                fixResult: function (result) {
+                this.inputedCharCount = 0;
                 this.running = false;
                 this.nextChar='=-=';//this reset highLight button
-                var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
-                usAch = usAch.concat(result);
+                    var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
+               this.placeholder = 'Your speed is ' + result + ' press enter for continue';
+
+                usAch = usAch.concat(result+'/'+this.errorCount);
                 this.$store.dispatch('SAVE_USER_ACHIEVEMENT_CHART', usAch);//Save result
             }
             ,

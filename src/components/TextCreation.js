@@ -156,8 +156,12 @@ function GetSentation(short = false) {
 const LearnSet = {
     set0: ["а", 'о', 'п', 'р'],
     set1: ["ы", 'в', "а", 'п', "р", 'о', "о", 'л', "д"],
-    set2: ["ы", 'в', "а", 'п', "р", 'о', "о", 'л', "д",
-        "ц", 'у', "к", 'е', "н", 'г', "ш", 'щ', "з",]
+    set2: ["ы", 'в', "а", 'п', "р", 'о', "о", 'л', "д", "ф","ж","э"],
+    set3:  ["ы", 'в', "а", 'п', "р", 'о', "о", 'л', "д","ф","ж","э",
+        "ц", 'у', "к", 'е', "н", 'г', "ш", 'щ', "з"],
+    set4:  ["ы", 'в', "а", 'п', "р", 'о', "о", 'л', "д","ф","ж","э",
+        "ц", 'у', "к", 'е', "н", 'г', "ш", 'щ', "з",
+        "ч", 'с', "м", 'и', "т", 'ь', "б", 'ю', ]
 }
 
 //получение набора букв для обучения
@@ -170,15 +174,21 @@ export function GetLern(type, short = false) {
     if (type === "learn3") {
         set = LearnSet.set2;
     }
+    if (type === "learn4") {
+        set = LearnSet.set3;
+    }
+    if (type === "learn5") {
+        set = LearnSet.set4;
+    }
     var res = new Array();
-    for (var i = 0; i < 32; i++) {
+    for (var i = 0; i < 41; i++) {
         var j = Math.floor(Math.random() * (set.length));
         if (i > 0 && !(res.length % 5)) {
-            res.push(' ');//insert white space every 3 simvols
+            res.push(' ');//insert white space every 4 simvols
         }
         res.push(set[j]);
     }
-    return res;
+    return res.join('');
 }
 
 //получение набора букв для обучения
@@ -224,7 +234,8 @@ export function GetKvasiText(count, lang, short) {
 
 export function GetKvasiTextS(set, short, isxArr = null) {
     var arr = new Array();
-    for (var i = 0; i < set.SentationsCount; i++) {
+    var i = 0
+    for ( i = 0; i < set.SentationsCount; i++) {
         switch (set.Mode) {
             case "KvaziText": {
                 arr[i] = GetSentation(short);
@@ -232,6 +243,8 @@ export function GetKvasiTextS(set, short, isxArr = null) {
             case "learn1":
             case "learn2":
             case "learn3":
+            case "learn4":
+            case "learn5":
                 {
                     arr[i] = GetLern(set.Mode, short);
                 } break;
@@ -247,16 +260,16 @@ export function GetKvasiTextS(set, short, isxArr = null) {
 
     if (set.Lang === 'en') {
         if (isxArr != null) {
-            for (var i = 0; i < set.SentationsCount; i++) {
+            for ( i = 0; i < set.SentationsCount; i++) {
                 isxArr[i] = arr[i];
             }
         }
-        for (var i = 0; i < set.SentationsCount; i++) {
+        for ( i = 0; i < set.SentationsCount; i++) {
             arr[i] = TRANSLATE(arr[i]);
         }
     }
     if (set.IgnoreCapital) {
-        for (var i = 0; i < set.SentationsCount; i++) {
+        for ( i = 0; i < set.SentationsCount; i++) {
             arr[i] = arr[i].toLowerCase();
         }
     }

@@ -90,7 +90,6 @@ export default {
       }
     }
   },
-
   watch: {
     currentUserSettings: {
       handler: function(newVal, oldVal) {

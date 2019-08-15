@@ -4,8 +4,8 @@
         <h4 class="column">Ошибок: {{ errorCount }}</h4>
         <h4 class="column">Введено символов: {{ inputedCharCount }}</h4>
         <h4 class="column">Средняя скорость: {{ totalSpeed }}</h4>
-        <!--<h3>скорость {{ currentSpeed }}</h3>-->
-        <!--<h3>timeBegin {{ timeBegin }}</h3>-->
+       <h3>скорость {{ currentSpeed }}</h3>
+        <h3>timeBegin {{ timeBegin }}</h3>
     </div>
 </template>
 <script>
@@ -15,7 +15,8 @@
         name: "speedometer",
         props: {
             inputedCharCount: 0,
-            errorCount: 0
+            errorCount: 0,
+            runningp:false
         },
 
         data() {
@@ -41,7 +42,7 @@
         }
         ,
         computed: {
-
+         
             running: {
                 get:
                     function () {
@@ -57,13 +58,18 @@
                 get:
                     function () {
                         //get from 
-                        const res=  this.$store.getters.GET_SPEED.toString();
-                        if(res==null)
-                     {return 0;} else
-                     {
-                      var srt_arr=res.split(',');
-                      return parseInt( srt_arr[0]);
-                     }
+                        var res = this.$store.getters.GET_SPEED.toString();
+
+                        if(res==null||res=='0') {res= '0/0';}
+                     
+                        if (res == "0/0") {
+                             this.startNewMeasuuring();
+                        }
+                        var srt_arr = res.split('/');
+                        var totalSp = srt_arr[0];
+                        console.log(totalSp);
+                      return parseInt( totalSp);
+
                     },
 
                 set:
@@ -75,12 +81,22 @@
         }
         ,
         watch: {
+
+               runningp:
+                function (newVal) {
+                    console.log('=========================RUNNING' + newVal);
+                    this.startNewMeasuuring();
+                }
+           
+            ,
+
             inputedCharCount: function (newVal) {
 //start meashure  when inputing char count changed
                 if (this.running == false) return;
                 var timeNow = new Date();
 
-                if (this.inputedCharCount == 0 || this.timeBegin == 0) {
+                if (this.inputedCharCount == 0) {
+                    this.timeBegin = 0
                     console.log("begin " + this.totalSpeed);
                     this.timeBegin = timeNow.getTime();
                     this.tickTime = this.timeBegin;
@@ -94,16 +110,14 @@
 
                 }
             }
-            ,
-
+             ,
             totalSpeed: function (newValue) {
                 console.log("totalSpeed=>" + newValue)
-                if (this.totalSpeed == '0') {
+                if (!newValue) {
                     this.startNewMeasuuring();
                 }
             }
         }
-        ,
      
     };
 </script>
