@@ -10,7 +10,8 @@
         <klava-inp :Example="Example" :Inputed="inputedString" align="left"
                    v-on:error="errorCount++"
                    v-on:next="nextSentation()"
-                   v-on:ok="setNextChar($event)" />
+                   v-on:ok="setNextChar($event)"
+                    />
         <input class="inputStr" type="text"
                v-model="inputedString"
                v-on:keyup.enter="nextText()"
@@ -116,7 +117,7 @@
             }
             ,
             setNextChar: function (param) {
-                this.inputedCharCount++;
+                this.inputedCharCount= this.inputedString.Length;
                 this.nextChar = param.toLowerCase();
             }
         }
@@ -132,9 +133,9 @@
         beforeMount() {
            
             //инициализация первый раз
-         //   this.AllExample = GetKvasiTextS(setting);
+            //this.AllExample = GetKvasiTextS(setting);
             //highLight first char in
-          //  this.nextChar = this.AllExample[0][0].toLowerCase();
+           //  this.nextChar = this.AllExample[0][0].toLowerCase();
            // this.setNextChar(firstChar);
         },
         afterMount() {

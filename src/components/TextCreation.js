@@ -4,15 +4,17 @@
 export function WordEx(dictName) {
     var counerNam = dictName + "_counter";
     var word = '';
-    //  console.log('Dicti['+counerNam+']='+Dicti[counerNam]);
+     
     if (!Dicti[counerNam]) { Dicti[counerNam] = 0 }//set counter=0 first time
-    if (Dicti[counerNam] == 0) {
+    if (Dicti[counerNam] == 0) {//create property counter 
         shuffleArray(Dicti[dictName]);//
-        // console.log('shuffled ' + dictName +'='+Dicti[counerNam]);
+      //  console.log('shuffled ' + dictName +'='+Dicti[counerNam]);
     }
     word = Dicti[dictName][Dicti[counerNam]];
     Dicti[counerNam]++;
-    if (Dicti[counerNam] = Dicti[dictName].length) {//if and of array
+  // console.log('Dicti['+counerNam+']='+Dicti[counerNam]);
+    if (Dicti[counerNam] == Dicti[dictName].length) {//if and of array
+
         Dicti[counerNam] = 0;
 
     }
