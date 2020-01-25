@@ -10,7 +10,7 @@
         </td>
         <td>
           <select v-model="currentUser">
-            <option v-for="user in users" v-bind:key="user">{{user}}</option>
+            <option v-for="user in users" v-bind:key="user">{{ user }}</option>
           </select>
         </td>
       </tr>
@@ -20,8 +20,9 @@
         </td>
         <td>
           <select v-model="currentUserSettings.Mode">
-            <option v-for="mode in avaiableModes" :key="mode" >{{mode}}</option>
-           
+            <option v-for="mode in avaiableModes" :key="mode">{{
+              mode
+            }}</option>
           </select>
         </td>
       </tr>
@@ -41,7 +42,11 @@
           <h3>Centanion count:</h3>
         </td>
         <td>
-          <input type="number" v-model="currentUserSettings.SentationsCount" style="width:50px" />
+          <input
+            type="number"
+            v-model="currentUserSettings.SentationsCount"
+            style="width:50px"
+          />
         </td>
       </tr>
       <tr>
@@ -148,7 +153,7 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
-<style scoped >
+<style scoped>
 h3 {
   margin: 4px;
 }

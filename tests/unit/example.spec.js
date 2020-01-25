@@ -18,7 +18,7 @@ describe("input1.vue", () => {
     const wrapper = shallowMount(inpVue, {
       propsData: { Example: ex, Inputed: inp }
     });
-    console.log('---'+wrapper.text());
+    console.log("---" + wrapper.text());
     expect(wrapper.text()).toMatch(inp);
   });
 });
