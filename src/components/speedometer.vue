@@ -1,4 +1,6 @@
-﻿<template>
+﻿
+
+<template>
     <div class="row">
         <!--<h3>Ошибок: {{ state }}</h3>-->
         <h4 class="column">Ошибок: {{ errorCount }}</h4>

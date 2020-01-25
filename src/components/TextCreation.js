@@ -1,6 +1,9 @@
-﻿import { WordSet ,Dicti} from "@/components/dictionry.js";
+﻿/*eslint no-unused-vars: "error"*/
+/* eslint no-console: "error" */
+/*global some_unused_var*/
 
-/*  */
+import { WordSet ,Dicti} from "@/components/dictionry.js";
+
 export function WordEx(dictName) {
     var counerNam = dictName + "_counter";
     var word = '';
@@ -168,6 +171,7 @@ const LearnSet = {
 
 //получение набора букв для обучения
 export function GetLern(type, short = false) {
+
     let set = LearnSet.set0;
     console.log(type);
     if (type === "learn2") {
@@ -219,11 +223,11 @@ export function GetWord(type, short = false) {
 //получение текста из count предложений на lang языке
 function KvasiText(count, lang, short) {
     var arr = new Array();
-    for (var i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
         arr[i] = GetSentation(short);
     }
     if (lang == 'en') {
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             arr[i] = TRANSLATE(arr[i]);
         }
     }
@@ -231,7 +235,8 @@ function KvasiText(count, lang, short) {
 }
 
 export function GetKvasiText(count, lang, short) {
-    return KvasiText(count, lang, true);
+
+    return KvasiText(count, lang, short);
 }
 
 export function GetKvasiTextS(set, short, isxArr = null) {
@@ -275,7 +280,6 @@ export function GetKvasiTextS(set, short, isxArr = null) {
             arr[i] = arr[i].toLowerCase();
         }
     }
-
-    return arr;
+return arr;
 }
 

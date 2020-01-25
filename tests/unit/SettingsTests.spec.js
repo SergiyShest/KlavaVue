@@ -1,3 +1,4 @@
+/* jshint ignore:start*/
 import { shallowMount ,createLocalVue} from "@vue/test-utils";
 import setting from "@/components/setting.vue";
 import {store} from '@/store/store';

@@ -1,4 +1,7 @@
-﻿<template>
+﻿/*eslint no-unused-vars: "error"*/
+/* eslint no-console: "error" */
+/*global some_unused_var*/
+<template>
   <div class="setting">
     <Table>
       <tr>
@@ -56,6 +59,7 @@
 </template>
 
 <script>
+
 import newSetting from "./newSetting.vue";
 
 import {
@@ -92,7 +96,7 @@ export default {
   },
   watch: {
     currentUserSettings: {
-      handler: function(newVal, oldVal) {
+      handler: function(newVal) {
         this.$emit("settingsChanged", newVal);
         this.LoadCurrUserResult(); //load result for this langr
       },
