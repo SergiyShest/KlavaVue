@@ -1,45 +1,35 @@
 ﻿<template>
-  <div class="main">
-    <div>Количество ошибок {{ errorCount }}</div>
-    <counter
-      :inputedCharCount="inputedCharCount"
-      v-on:result="fixResult($event)"
-    />
-    <!--<speedometer :inputedC
+    <div class="main">
+        <div>Количество ошибок {{ errorCount }}</div>
+        <counter :inputedCharCount="inputedCharCount"
+                 v-on:result="fixResult($event)" />
+        <!--<speedometer :inputedCharCount="inputedCharCount" :errorCount="errorCount" :runningp="running" />-->
+        <div>{{InitExample[nextSentationIndex]}}</div>
 
-        harCount="inputedCharCount" :errorCount="errorCount" :runningp="running" />
-        <div>{{InitExample[nextSentationIndex]}}</div>-->
-
-    <klava-inp
-      :Example="Example"
-      :Inputed="inputedString"
-      align="left"
-      v-on:error="errorCount++"
-      v-on:next="nextSentation()"
-      v-on:ok="setNextChar($event)"
-    />
-    <input
-      class="inputStr"
-      type="text"
-      v-model="inputedString"
-      v-on:keyup.enter="nextText()"
-      v-on:keydown="charDown = $event"
-      v-on:keyup="charUp = $event"
-      autofocus
-      v-bind:placeholder="placeholder"
-      align="left"
-    />
-    <br />
-    <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
-    <div class="row">
-      <setting
-        class="column"
-        v-on:settingsChanged="settingsChanged($event)"
-        style="width:auto"
-      />
-      <chart class="column" style="min-width:80%" />
+        <klava-inp :Example="Example"
+                   :Inputed="inputedString"
+                   align="left"
+                   v-on:error="errorCount++"
+                   v-on:next="nextSentation()"
+                   v-on:ok="setNextChar($event)" />
+        <input class="inputStr"
+               type="text"
+               v-model="inputedString"
+               v-on:keyup.enter="nextText()"
+               v-on:keydown="charDown = $event"
+               v-on:keyup="charUp = $event"
+               autofocus
+               v-bind:placeholder="placeholder"
+               align="left" />
+        <br />
+        <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
+        <div class="row">
+            <setting class="column"
+                     v-on:settingsChanged="settingsChanged($event)"
+                     style="width:auto" />
+            <chart class="column" style="min-width:80%" />
+        </div>
     </div>
-  </div>
 </template>
 <script>
 import { GetKvasiTextS } from "./TextCreation.js";
