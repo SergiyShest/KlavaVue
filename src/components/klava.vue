@@ -14,13 +14,11 @@
         <input class="inputStr" type="text"
                v-model="inputedString"
                v-on:keyup.enter="nextText()"
-               v-on:keydown="charDown=$event"
-               v-on:keyup="charUp=$event"
                autofocus
                v-bind:placeholder="placeholder"
                align="left" />
         <br />
-        <buttons :charDown="charDown" :charUp="charUp" :nextChar="nextChar" />
+        <buttons />
         <div class="row">
             <setting class="column" v-on:settingsChanged="settingsChanged($event)"
                      style="width:auto" />
@@ -55,9 +53,6 @@
                 errorCount: 0,
                 nextSentationIndex: 0,
                 running: true,
-                charDown: null,
-                charUp: null,
-                nextChar: null,
                 setting:null,
                 avaiableLang: ['ru', 'en'],
                 InitExample: [],//для английского языка первоначальный русский вариант
@@ -100,15 +95,14 @@
                 this.nextSentationIndex = 0;
                 this.InitExample = new Array();
                 this.AllExample = GetKvasiTextS(this.setting,false,this.InitExample);
-                this.nextChar = this.AllExample[0][0].toLowerCase(); 
+
                 this.running = true;
             }
             ,
                 fixResult: function (result) {
                 this.inputedCharCount = 0;
                 this.running = false;
-                this.nextChar='=-=';//this reset highLight button
-                    var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
+               var usAch = this.$store.getters.GET_USER_ACHIEVEMENT_CHART;
                this.placeholder = 'Your speed is ' + result + ' press enter for continue';
 
                 usAch = usAch.concat(result+'/'+this.errorCount);
@@ -117,7 +111,6 @@
             ,
             setNextChar: function (param) {
                 this.inputedCharCount++;
-                this.nextChar = param.toLowerCase();
             }
         }
         ,

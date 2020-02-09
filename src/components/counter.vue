@@ -29,7 +29,7 @@
             update: function () {
                 if (this.inputedCharCount > 0) {
                     this.calculateAvgSpeed(this.inputedCharCount);
-                    charCount = this.inputedCharCount;
+                    this.charCount = this.inputedCharCount;
                 }
             },
             //take avg speed in min

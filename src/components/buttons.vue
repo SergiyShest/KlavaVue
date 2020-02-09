@@ -1,26 +1,20 @@
 ﻿<template>
     <div>
-        <!--pressed: b.isPressed-->
         <Button v-for="b in row1" :key="b.code" v-bind:class="{  highlight:b.highlight }">{{b.sh}}</Button><br />
         <button style="width:9%">TAB</button>
         <Button v-for="b in row2" :key="b.code" v-bind:class="{ highlight:b.highlight}">{{b.sh}}</Button><br />
         <button style="width:12%">Caps Lock</button>
         <Button v-for="b in row3" :key="b.code" v-bind:class="{highlight:b.highlight}">{{b.sh}}</Button><br />
-        <button style="width:16%">Shift</button>
+        <!--<button style="width:16%"   >Shift</button>-->
         <Button v-for="b in row4" :key="b.code" v-bind:class="{highlight:b.highlight}">{{b.sh}}</Button><br />
         <Button v-for="b in row5" :key="b.code" v-bind:class="{highlight:b.highlight}" v-bind:style="{ width: b.Width+'%' }">{{b.sh}}</Button><br />
 
     </div>
 </template>
 <script>
-    //коммент
+    import { mapActions, mapState, mapSetters, mapGetters } from 'vuex'
     export default {
         name: "buttons",
-        props: {
-            charDown: { default: null },
-            charUp: { default: null },
-            nextChar: { default: null },
-        },
         data() {
             return {
                 row1: [
@@ -45,6 +39,7 @@
                 { code: "Semicolon;", sh: 'ж', isPressed: false, highlight: false }, { code: "Quote;", sh: 'э', isPressed: false, highlight: false }, { code: "enter", sh: 'Enter' }],
 
                 row4: [
+                { code: "Shift", sh: 'Shift', isPressed: false, highlight: false  },
                 { code: "KeyZ", sh: 'я', isPressed: false, highlight: false }, { code: "KeyX", sh: 'ч', isPressed: false, highlight: false }, { code: "KeyC", sh: 'с', isPressed: false, highlight: false },
                 { code: "KeyV", sh: 'м', isPressed: false, highlight: false }, { code: "KeyB", sh: 'и', isPressed: false, highlight: false }, { code: "KeyN", sh: 'т', isPressed: false, highlight: false },
                 { code: "KeyM", sh: 'ь', isPressed: false, highlight: false }, { code: "Comma", sh: 'б', isPressed: false, highlight: false }, { code: "Period", sh: 'ю', isPressed: false, highlight: false },
@@ -53,9 +48,8 @@
 
                 row5: [
                 { code: "Ctrl", sh: 'Ctrl', isPressed: false, highlight: false }, { code: "fn", sh: 'fn', isPressed: false, highlight: false }, { code: "Win", sh: 'Win', isPressed: false, highlight: false },
-                { code: "AltL", sh: 'Alt', isPressed: false, highlight: false }, { code: "Space", sh: 'Пробел', isPressed: false, highlight: false, Width: 50 },
+                { code: "AltL", sh: 'Alt', isPressed: false, highlight: false }, { code: "Space", sh: 'Пробел', isPressed: false, highlight: false },
                 { code: "AltR", sh: 'Alt', isPressed: false, highlight: false }
-
                 ]
             }
         }
@@ -92,63 +86,65 @@
                         }
                     }
                 }
-            }
-            ,
-
-
+            },
             highlightButton: function (code, highligh) {
 
-                var item = this.row1.find(function (v) { return v.sh == code; });
+                var item = this.row1.find(function (v) { return v.sh.toLowerCase() == code.toLowerCase(); });
                 if (item != undefined) {
                     item.highlight = highligh;
+                    item.sh= code;
                 }
                 else {
-                    item = this.row2.find(function (v) { return v.sh == code; });
+                    item = this.row2.find(function (v) { return v.sh.toLowerCase() == code.toLowerCase(); });
                     if (item != undefined) {
                         item.highlight = highligh;
+                        item.sh = code;
                     }
                     else {
-                        item = this.row3.find(function (v) { return v.sh == code; });
+                        item = this.row3.find(function (v) { return v.sh.toLowerCase() == code.toLowerCase(); });
                         if (item != undefined) {
                             item.highlight = highligh;
+                            item.sh = code;
                         }
                         else {
-                            item = this.row4.find(function (v) { return v.sh == code; });
+                            item = this.row4.find(function (v) { return v.sh.toLowerCase() == code.toLowerCase();});
                             if (item != undefined) {
                                 item.highlight = highligh;
+                                item.sh = code;
                             }
                             else {
                                 if (code == ' ')
                                 {
                                     code = 'Пробел';
                                 }
-                                item = this.row5.find(function (v) { return v.sh == code; });
+                                item = this.row5.find(function (v) { return v.sh.toLowerCase() == code.toLowerCase(); });
                                 if (item != undefined) {
                                     item.highlight = highligh;
+                                   // item.sh = code;
                                 }
-
                             }
 
                         }
                     }
                 }
             }
-
-
         }
 
 
         ,
         watch: {
-            //charDown: function (inutedChar) {
-            //    this.setButtonPressed(inutedChar.code, true);
-            //},
-            //charUp: function (inutedChar) {
-            //    this.setButtonPressed(inutedChar.code, false);
-            //},
+
             //HighLigth char thet user need press
             nextChar: function (nextChar, oldChar) {
-                if (oldChar != null) { this.highlightButton (oldChar, false); }
+
+                this.highlightButton('Shift', false);
+                if (oldChar != null) { this.highlightButton(oldChar, false); }
+
+                if (nextChar != nextChar.toLowerCase()) {
+                    this.highlightButton('Shift', true);
+                }
+             //   if (nextChar != null)
+             //       nextChar = nextChar.toLowerCase(); 
 
                 this.highlightButton(nextChar, true);
             }
@@ -156,6 +152,9 @@
         beforeMount() {
             if (this.nextChar != null) { this.highlightButton(this.nextChar , true); }
           
+        },
+        computed: {
+            ...mapGetters(['nextChar'])
         },
     }
 </script>
